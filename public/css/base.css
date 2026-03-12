@@ -1,0 +1,1584 @@
+/* =============================================
+   Base variables and global layout - Updated with Figma colors
+   ============================================= */
+/* ===== Updated Palette with Figma Colors ===== */
+:root {
+    --primary: #2d3281; /* Deep blue from Figma */
+    --secondary: #37a7df; /* Light blue from Figma */
+    --accent: #e84e23; /* Orange accent from Figma */
+    --warning: #f1a601; /* Yellow from Figma */
+    --danger: #fe5716; /* Red-orange from Figma */
+    --dark: #333333; /* Dark gray from Figma */
+    --light: #fafafa; /* Light background from Figma */
+    --muted: #666666; /* Muted text from Figma */
+    --border: #dadada; /* Light borders from Figma */
+    --surface: #f1f1f1; /* Surface color from Figma */
+    --text-muted: #949494; /* Muted text from Figma */
+    /* Legacy variables for compatibility */
+    --indigo: #2d3281; /* Updated to Figma primary */
+    --sky: #37a7df; /* Updated to Figma secondary */
+    --ink: #333333; /* Updated to Figma dark */
+    --card-bd: #dadada; /* Updated to Figma border */
+}
+/* Added proper font family and improved global layout */
+body {
+    color: var(--dark);
+    background-color: #ffffff;
+    font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+/* Improved container widths to reduce excessive side spacing */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.container-fluid {
+    padding: 0 20px;
+}
+/* Keep page content separate from the header */
+.header-aisla {
+    position: relative;
+    z-index: 50;
+}
+main,
+.page-content,
+.hero,
+.page-hero {
+    position: relative;
+    z-index: 1;
+}
+/* Loading spinner overlay */
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.5s ease-out,
+        visibility 0s linear 0.5s;
+    z-index: 9999;
+}
+#spinner.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+/* Updated global text colors to use Figma palette */
+.text-primary {
+    color: var(--primary) !important;
+}
+.text-secondary {
+    color: var(--secondary) !important;
+}
+.text-muted {
+    color: var(--muted) !important;
+}
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+.bg-secondary {
+    background-color: var(--secondary) !important;
+}
+.bg-light {
+    background-color: var(--light) !important;
+}
+.clean-energy h2 {
+    font-weight: 700;
+}
+.clean-energy ul li {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+.clean-energy .quote {
+    font-size: 1.1rem;
+}
+.btn-contact {
+    background-color: #7CAE2A; /* vert principal */
+    color: #fff;
+    border-radius: 20px; /* arrondi */
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.btn-contact:hover {
+    background-color: #7CAE2A; /* vert plus foncé au hover */
+    color: #fff;
+}
+.btn-accent{
+  background:#7CAE2A; border:none; color:#ffffff; font-weight:700;
+}
+.btn-accent:hover{ filter:brightness(.95); }
+.btn-dark-ghost{
+  background:rgba(12,22,39,.85); color:#fff; border:1px solid rgba(255,255,255,.25);
+}
+.btn-dark-ghost:hover{ background:rgba(12,22,39,.95); }
+.hero-dots{ height:8px; width:120px; background:rgba(255,255,255,.2); border-radius:999px; }
+.hero-progress{ height:4px; width:180px; background:rgba(255,255,255,.18); border-radius:999px; overflow:hidden; }
+.hero-progress-bar{ height:100%; width:40%; background:#35c24a; }
+/* Bouton vert plein */
+.btn-contact {
+    background-color: #7cb342;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.btn-contact:hover {
+    background-color: #689f38;
+    color: #fff;
+}
+/* Bouton vert contour */
+.btn-outline-contact {
+    border: 2px solid #7CAE2A;
+    color: #7CAE2A;
+    border-radius: 30px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.btn-outline-contact:hover {
+    background-color: #7cb342;
+    color: #fff;
+}
+
+/* Une seule image de fond qui change */
+.hero-aisla{
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: no-repeat center/cover var(--hero-bg-img);
+  color: #fff;
+  overflow: hidden;
+}
+/* Désactive totalement tout overlay/pseudo-élément */
+.hero-aisla::before{
+  content: "";           /* nécessaire pour cibler le pseudo-élément */
+  display: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+/* S'assurer que le contenu passe au-dessus du voile */
+.hero-aisla .container, .hero-aisla .row { position: relative; z-index: 2; }
+.hero-overlay{
+  display: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+/* courbe sombre en bas */
+.hero-curve{
+  position:absolute; left:0; right:0; bottom:-1px; height:350px; z-index:1;
+  background: radial-gradient(120% 120% at 50% -10%, transparent 60%, #242958 61%);
+}
+.hero-aisla .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(247, 247, 248, 0.4); /* assombri l’image */
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: 'Times New Roman', serif;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.hero-text {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.btn-green {
+  background: #6fcf97;
+  color: #fff;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn-green:hover {
+  background: #57ae7a;
+}
+/* HERO SECTION STYLE */
+.hero-aisla {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: no-repeat center/cover var(--hero-bg-img);
+  color: #fff;
+  overflow: hidden;
+  padding-left: 5%; /* pour coller à gauche */
+}
+/* Overlay léger */
+.hero-aisla::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35); /* voile assombri */
+  z-index: 1;
+}
+/* Titre principal */
+.hero-title {
+  font-size: 3.2rem;          /* grande taille */
+  font-family: "Times New Roman", serif; /* comme ta capture */
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+/* Sous-titre */
+.hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+  color: #f1f1f1;
+}
+/* Texte descriptif */
+.hero-text {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+/* Bouton vert (Get Started) */
+.btn-green {
+  background: #7CAE2A;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.75rem 1.8rem;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+.btn-green:hover {
+  background: #5e8f1e;
+  color: #fff;
+}
+/* Bouton transparent (Watch Video) */
+.btn-outline-light {
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 0.75rem 1.8rem;
+  border-radius: 30px;
+  transition: 0.3s;
+  background: transparent;
+}
+.btn-outline-light:hover {
+  background: #fff;
+  color: #333;
+}
+/* Bouton principal – vert "Get Started" */
+/* Bouton secondaire – contour blanc (ghost) */
+.btn-dark-ghost{
+  background: transparent !important;
+  border: 2px solid rgba(255,255,255,.9) !important;
+  color: #fff !important;
+  font-weight: 600;
+  backdrop-filter: saturate(120%) blur(0.5px);
+  transition: background-color .2s ease, color .2s ease, transform .15s ease;
+}
+.btn-dark-ghost:hover{
+  background: rgba(255,255,255,.12) !important;
+  transform: translateY(-1px);
+}
+/* Pilules un peu plus grandes comme dans l’image */
+.btn.rounded-pill{
+  border-radius: 999px;
+  padding: 0.95rem 1.6rem;   /* tu gardes ton px-4 py-3 si tu veux */
+  font-size: 0.98rem;
+}
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;       /* cercle parfait */
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s, transform 0.2s;
+}
+.hero-arrow:hover {
+  background: rgba(0,0,0,0.7);
+  transform: translateY(-50%) scale(1.1);
+}
+.hero-arrow-left {
+  left: 20px;
+}
+.hero-arrow-right {
+  right: 20px;
+}
+.hero-arrow i {
+  font-size: 20px;
+}
+.after-hero-text .big-title {
+    font-size: 6rem;       /* très grand */
+    font-weight: 300;      /* pas en gras */
+    line-height: 1.2;
+    margin: 0;
+}
+.after-hero-text .text-green {
+    color: #7CC242;        /* vert clair */
+    font-weight: 300;
+}
+.after-hero-text .text-darkblue {
+    color: #1E2452;        /* bleu foncé */
+    font-weight: 300;
+}
+.hero-aisla .hero-copy {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;   /* largeur du bloc de texte */
+    width: 90%;         /* responsive */
+    text-align: left;   /* chaque ligne commence au même niveau à gauche */
+    padding: 0 1rem;
+    flex-direction: column;       /* permet d’empiler le texte et les boutons */
+    justify-content: space-between; /* texte en haut, boutons en bas */
+}
+/* Boutons du HERO : côte à côte, centrés en bas */
+.hero-aisla { position: relative; }
+
+.hero-aisla .hero-buttons{
+  position: absolute;
+  left: 50%;
+  bottom: clamp(20px, 6vh, 48px);   /* ajuste la hauteur depuis le bas */
+  transform: translateX(-50%);
+  z-index: 3;                       /* au-dessus du voile */
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin: 0 !important;             /* annule tes anciens margin-left/top */
+  flex-wrap: nowrap;                 /* côte à côte */
+}
+.hero-aisla .hero-buttons{ bottom: -270px !important; }
+
+.hero-aisla .hero-buttons .btn{
+  white-space: nowrap;               /* évite le retour à la ligne */
+  padding: 0.85rem 1.6rem;           /* taille confortable */
+}
+
+/* Ajuste un peu sur mobile très étroit */
+@media (max-width: 420px){
+  .hero-aisla .hero-buttons .btn{
+    padding: 0.65rem 1.1rem;
+    font-size: .95rem;
+  }
+  .hero-aisla .hero-buttons{
+    gap: 10px;
+  }
+}
+
+/* Hero Title */
+.hero-aisla .hero-title {
+    font-family: 'Anuphan', sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+/* Hero Summary */
+.hero-aisla .hero-sub {
+    font-family: 'Anuphan', sans-serif;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+/* Boutons centrés horizontalement sous le texte */
+.hero-aisla .hero-buttons {
+    justify-content: flex-start; /* aligne les boutons avec le texte */
+}
+/* ================== THEME ================== */
+:root{
+  --about-green: #69bb36;   /* vert des pastilles/bouton/titre */
+  --about-navy:  #2d2f67;   /* plaque bleue derrière l'image */
+  --about-text:  #000000;   /* texte gris du paragraphe */
+  --about-white: #ffffff;
+  --about-radius: 18px;
+}
+/* ================== TEXTE ================== */
+.about-fei .about-kicker{
+  color: var(--about-green);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.about-fei .about-title{
+  color: var(--about-green);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 40px);  /* taille comme la maquette */
+  line-height: 1.1;
+  margin: 0;
+}
+.about-fei .about-text{
+  color: var(--about-text);
+}
+.about-fei .about-subtitle{
+  color: var(--about-green);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+/* ================== VALEURS ================== */
+.about-values .about-value{
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+  column-gap: 12px;
+  min-width: 220px; /* pour garder l’espacement comme l’image */
+}
+.shape{
+  width: 48px; height: 48px;
+  display: inline-block;
+}
+/* Hexagone plein vert (SVG pur via background) */
+.shape-hex{
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="25,5 75,5 100,50 75,95 25,95 0,50"/></svg>') no-repeat center/contain;
+          mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="25,5 75,5 100,50 75,95 25,95 0,50"/></svg>') no-repeat center/contain;
+  background: var(--about-green);
+  border-radius: 0; /* pas d’arrondi sur l’hexagone */
+}
+.shape-dot{
+  background: var(--about-green);
+  border-radius: 999px;
+}
+.about-btn-img {
+  max-width: 2590px;  /* 🔥 taille plus grande (augmente à volonté) */
+  display: block;
+}
+.about-fei .col-lg-6 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* reste à gauche */
+  justify-content: flex-start; /* colle en haut */
+}
+/* Titre "Happy Customers, Happy World" */
+/* Titre */
+.hcw-title {
+  margin: 0;
+  color: #1f2658;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(32px, 6vw, 64px);
+  font-family: Inter, "SF Pro Text", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+/* Image sous le titre */
+.hcw-img {
+  max-width: 1300px;   /* ✅ règle la taille */
+  width: 100%;        /* responsive */
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hcw{ padding-top: 8px; padding-bottom: 8px; }
+.about-values .label{
+  color: #cbd5df;
+  font-weight: 600;
+}
+/* ================== BOUTON ================== */
+.about-btn{
+  background: var(--about-green);
+  color: #0f1a10;
+  border-radius: 10px;
+  padding: 14px 22px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  text-decoration: none;
+}
+.about-btn .btn-icon{
+  width: 36px; height: 36px;
+  line-height: 36px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  display: inline-grid;
+  place-items: center;
+  font-weight: 800;
+}
+.about-btn:hover{
+  color: #0f1a10;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(105,187,54,.45);
+}
+/* ================== MEDIA (image + plaque) ================== */
+.about-media{
+  position: relative;
+  display: inline-block;
+  border-radius: 20px; /* arrondi identique */
+  isolation: isolate;
+}
+/* ===== Carte service ===== */
+.service-card{
+  position: relative;
+  border-radius: 20px;       /* arrondi comme l’image */
+  overflow: hidden;
+  min-height: 520px;         /* ajuste selon ton design */
+}
+/* Image plein cadre */
+.service-card__img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:center;
+  border-radius: 20px;       /* arrondi cohérent */
+}
+/* Petite carte blanche */
+.service-card__info{
+  position:absolute;
+  background:#fff;
+  border-radius:14px;
+  padding:16px 20px;
+  max-width: 240px;          /* largeur proche du rendu */
+  box-shadow:0 8px 18px rgba(218, 5, 5, 0.12);
+}
+/* Placement (par défaut bas-gauche) */
+.service-card__info--bottom-left{ left:18px; bottom:18px; }
+/* Titre */
+.service-card__name{
+  font-weight:700;
+  font-size:1rem;
+  color:#4A8F2C;             /* vert comme ton exemple */
+  margin-bottom:8px;
+}
+.service-card__name:hover{ text-decoration:underline; }
+/* Texte */
+.service-card__text{
+  font-size:0.9rem;
+  line-height:1.4;
+  color:#444;
+}
+/* ===== Petite carte blanche style ===== */
+.service-card__info{
+  background:#fff;
+  border-radius:14px;
+  padding:18px 20px;
+  max-width: 260px;
+  box-shadow:0 8px 24px rgba(0,0,0,.15);  /* ombre diffuse */
+}
+.service-card__info--lower{
+  bottom: 150px; 
+  /* plus près du bas */
+}
+.full-width-img img {
+    width: 100%;        /* occupe toute la largeur */
+    height: auto;       /* garde le ratio */
+    display: block;     /* enlève l’espace blanc en bas */
+}
+/* Titre vert souligné */
+.service-card__name{
+  font-weight:600;
+  font-size:1rem;
+  color:#4A8F2C;             /* vert */
+  text-decoration:underline; /* souligné */
+  margin-bottom:10px;
+}
+/* Texte description */
+.service-card__text{
+  font-size:0.92rem;
+  line-height:1.5;
+  color:#666;                /* gris doux */
+  margin:0;
+}
+.pub-section {
+  margin-top: 180px !important; /* espace avant la section */
+}
+/* Responsive */
+@media (max-width: 992px){
+  .service-card{ min-height:280px; }
+  .service-card__info{ max-width: 75%; }
+  .service-card__info--right{ right: 6%; }
+  .service-card__info--left{  left:  6%; }
+}
+@media (max-width: 576px){
+  .service-card{ min-height:240px; }
+  .service-card__info{ max-width: 86%; top:auto; bottom: 6%; left: 7%; right: 7%; }
+}
+/* Cadre bleu derrière */
+.about-media::before{
+  content: "";
+  position: absolute;
+  top: -12px;    /* décalage vers le haut */
+  right: -12px;   /* décalage à gauche */
+  left: 12px;   /* décale un peu la largeur pour donner l’effet */
+  bottom: 12px;  /* décale en bas */
+  background: #2d2f67; /* bleu foncé */
+  border-radius: 20px;
+  z-index: 0;
+}
+/* L’image au-dessus */
+.about-media img{
+  display: block;
+  width: 100%;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 18px rgba(0,0,0,.35); /* ombre comme la maquette */
+}
+/* Liseré/ombre en pointillés simulés (optionnel – effet “grain”) */
+.about-media::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 -12px 0;
+  height: 10px;
+  border-radius: 0 0 var(--about-radius) var(--about-radius);
+  box-shadow: 0 18px 20px rgba(0,0,0,.35);
+  z-index: 0;
+}
+/* ================== RESPONSIVE ================== */
+@media (max-width: 991.98px){
+  .about-media::before{
+    inset: -12px -12px auto auto;
+    height: 78%;
+  }
+  .about-values .about-value{
+    min-width: 46%;
+  }
+}
+/* Wrapper */
+.blog-card{
+  position: relative;
+  height: 160px;    
+  min-height: 320px;
+  border-radius: 16px;        /* radius only here */
+  overflow: hidden;           /* clip children to radius */
+  background:#000;            /* prevents grey bleed on edges */
+}
+
+/* Full-cover image */
+.blog-card__img{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 150% !important;
+  height: 150% !important;
+  object-fit: cover !important;          /* fill entire card */
+  display: block !important;
+  /* IMPORTANT: no border-radius here */
+  border: 0;
+}
+
+/* Overlay */
+.blog-card__overlay{
+  position: absolute;
+  inset: 0;
+  /* no radius here either */
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0) 20%, rgba(0,0,0,.55) 85%),
+    rgba(0,0,0,.10);
+}
+
+/* Content */
+.blog-card__content{
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  padding-bottom: 96px;   /* réserve la place du bouton */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card__cat{ font-size:.78rem; font-weight:700; color:#6FA0C8; }
+.blog-card__title{ font-size:1.25rem; font-weight:800; margin:0;color:#ffffff; }
+.blog-card__meta{ font-size:.9rem; opacity:.95; display:flex; gap:10px; }
+.blog-card__date{ display:flex; align-items:center; gap:6px; color:#E8F0F8; }
+.blog-card__excerpt{ font-size:1rem; line-height:2; color:#E6F7F0; }
+
+/* Bouton fixé en bas */
+.blog-card__btn{
+  position: absolute;
+  left: 74px;
+  right: 214px;            /* retire si tu veux un bouton à gauche uniquement */
+  bottom: 20px;
+  z-index: 3;
+
+  background:#6DB139;
+  color:#fff;
+  font-weight:700;
+  padding:10px 18px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.blog-card__btn-icon{
+  background:rgba(255,255,255,.25);
+  border-radius:50%;
+  width:26px; height:26px;
+  display:grid; place-items:center;
+}
+/* ===== Section Head "Blog" (style capture) ===== */
+.blog-intro{
+  max-width: 640px;
+  margin-left: 0;           /* aligné à gauche */
+  margin-right: auto;
+  text-align: left;
+}
+
+.blog-intro__title{
+  color: #6DB139;           /* vert du thème */
+  font-weight: 800;
+  font-size: 2rem;          /* ≈ 32px – ajuste si besoin */
+  line-height: 1.1;
+  margin: 0 0 .35rem 0;
+}
+
+.blog-intro__desc{
+  color: #5f6368;           /* gris doux comme la capture */
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 1rem 0;
+  max-width: 56ch;
+}
+
+/* Bouton vert avec pastille flèche */
+.blog-intro__cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #6DB139;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+
+.blog-intro__cta-icon{
+  display: grid;
+  place-items: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  font-weight: 900;
+}
+
+.blog-intro__cta:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(109,177,57,.40);
+  opacity: .95;
+}
+
+/* Mobile tweak */
+@media (max-width: 576px){
+  .blog-intro__title{ font-size: 1.75rem; }
+}
+/* Style normal (dans le header) */
+.quote-btn {
+  transition: all 0.3s ease;
+}
+
+/* Style quand le bouton est fixé en bas */
+.quote-btn.fixed-bottom {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 100;
+  border-radius: 50px;   /* pour un style plus moderne */
+  padding: 1px 2px;
+      background-color: #7CAE2A; /* vert principal */
+    color: #fff;
+    border-radius: 20px; /* arrondi */
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+        background-color: #7CAE2A; /* vert plus foncé au hover */
+    color: #fff;
+  
+}
+
+/* Bouton principal réduit et positionné à droite */
+.quote-btn.fixed-bottom {
+  position: fixed;
+  bottom: 30px;      /* distance depuis le bas */
+  right: 20px;       /* distance depuis la droite */
+  z-index: 100;
+
+  /* Taille réduite */
+  font-size: 0.75rem;
+  padding: 5px 10px;  /* hauteur et largeur du bouton */
+
+  /* Couleur soft (transparente) */
+  background-color: rgba(124, 174, 42, 0.5); /* vert clair transparent */
+  color: #fff;
+
+  border: none;
+  border-radius: 15px;
+  font-weight: 500;
+
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* Effet au hover */
+.quote-btn.fixed-bottom:hover {
+  background-color: #7CAE2A; /* vert 100% opaque */
+  color: #fff;
+}
+.header-aisla{ position: fixed; top:0; left:0; right:0; z-index:1040; }
+body{ padding-top: 72px; } /* adapte à la hauteur réelle du header */
+/* Header compact sans réduire la taille des éléments internes */
+.header-aisla.sticky-top { z-index: 1040; }  /* au-dessus du contenu */
+
+.header-aisla .navbar{
+  padding-top: 4px !important;   /* compact desktop */
+  padding-bottom: 4px !important;
+}
+
+@media (max-width: 991.98px){
+  /* garde un peu plus d’espace sur mobile pour le confort tactile */
+  .header-aisla .navbar{
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+}
+
+/* (optionnel) verrouille le logo si jamais il se re-dimensionne ailleurs */
+.logo-navbar{
+  height: auto;            /* conserve la taille d’origine de l’image */
+  max-height: 100px;        /* ajuste si tu veux un plafond de hauteur */
+}
+
+
+/* Titre */
+.partners-title{
+  margin:0 0 18px 0; text-align:center; color:#fff;
+  font-weight:800; line-height:1.1;
+  font-size:clamp(28px,6vw,64px);
+}
+
+/* ===== Partenaires : 4 x 2, logos + GRANDS ===== */
+.pub-section .full-width-img { position: relative; }
+
+.pub-section .partners-overlay{
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: flex-start;
+  padding-top: clamp(20px, 61vw, 60px);
+  z-index: 2;
+}
+
+/* Grille (4 colonnes => 2 rangées si 8 logos) */
+.pub-section .partners-logos{
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: clamp(24px, 3vw, 48px) clamp(28px, 3.5vw, 56px) !important;
+  width: min(1700px, 96%) !important;
+  margin: clamp(6px, 1.2vw, 16px) auto 0 !important;
+}
+
+/* Slot (pas de carte) — TAILLE DES LOGOS ↑↑ */
+.pub-section .partner-logo-link{
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  height: clamp(180px, 15vw, 300px) !important;  /* <<< augmente ici si tu veux ENCORE plus grand */
+  padding: 0 !important; margin: 0 !important;
+  background: transparent !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+}
+
+/* Slot (pas de carte) — TAILLE DES LOGOS ↑↑ */
+.pub-section .partnerr-logo-link{
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  height: clamp(180px, 1vw, 300px) !important;  /* <<< augmente ici si tu veux ENCORE plus grand */
+  padding: 0 !important; margin: 0 !important;
+  background: transparent !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+}
+/* Image : remplissage du slot sans déformation */
+.pub-section .partner-logo{
+  max-height: 100% !important;
+  max-width: 92% !important;
+  width: auto !important; height: auto !important;
+  object-fit: contain !important;
+}
+
+/* ===== Force 4 en haut + 4 en bas (8 au total) sur desktop ===== */
+@media (min-width: 992px){
+  /* 4 colonnes fixes */
+  .pub-section .partners-logos{
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  /* on n'affiche que les 8 premiers (2 rangées) */
+  .pub-section .partners-logos > *:nth-child(n+9){
+    display: none !important;
+  }
+}
+
+/* Optionnel : si tu veux aussi 4x2 sur grands écrans larges */
+@media (min-width: 1400px){
+  .pub-section .partners-logos{
+    width: min(1600px, 94%) !important; /* largeur confortable pour respirer */
+  }
+}
+.partners-logos--two-rows{
+  display:grid; grid-template-columns:repeat(4,1fr); gap: clamp(24px, 3vw, 48px) clamp(28px, 3.5vw, 56px);
+}
+@media (max-width: 992px){
+  .partners-logos--two-rows{ grid-template-columns:repeat(2,1fr); }
+}
+/* Desktop : remonter les 2 rangées différemment */
+@media (min-width: 992px){
+  /* 4 premiers (rangée 1) : un peu plus haut */
+  .pub-section .partners-logos > *:nth-child(-n+4){
+    transform: translateY(-14px);
+    will-change: transform;
+  }
+
+  /* 4 suivants (rangée 2) : encore plus haut */
+  .pub-section .partners-logos > *:nth-child(n+5):nth-child(-n+8){
+    transform: translateY(-116px);
+    will-change: transform;
+  }
+
+  /* Optionnel: resserrer un peu l'espace vertical entre les rangées */
+  .pub-section .partners-logos{
+    row-gap: 20px !important; /* ajuste 16–28 selon ton rendu */
+  }
+}
+/* ====== Testimonials (Customers) ====== */
+.t-card{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+  padding:24px;
+  border-radius:16px;
+  min-height: 260px;         /* cartes homogènes */
+}
+
+.t-stars { letter-spacing: 2px; }
+.t-star--on  { color: #f1a601; }      /* jaune (warning) */
+.t-star--off { color: #e2e6ea; }      /* gris clair */
+
+.t-title{
+  color:#1E2452;             /* bleu foncé */
+  font-weight:800;
+  font-size:1.25rem;
+  line-height:1.25;
+}
+
+.t-comment{
+  color:#5f6368;             /* gris doux */
+  line-height:1.7;
+}
+
+.t-author{
+  color:#69bb36;             /* vert comme ta charte */
+  font-weight:600;
+  font-size:1.05rem;
+}
+
+/* Grille responsive 3 / 2 / 1 colonnes déjà gérée par Bootstrap
+   (col-lg-4, col-md-6, col-12) ; on s'assure juste des hauteurs égales */
+.t-card{ height: 100%; }
+/* Couleur et espacement des étoiles */
+.t-stars i{
+  color: #f1a601;          /* même jaune que --warning */
+  margin-right: 4px;
+  font-size: 1.1rem;       /* ajuste si besoin */
+}
+/* Couleur/contraste des étoiles */
+.t-stars .fa-star{ margin-right:4px; font-size:1.1rem; }
+.t-stars .fa-solid.fa-star{ color:#f1a601; }   /* allumées */
+.t-stars .fa-regular.fa-star{ color:#d7dbe3; } /* éteintes */
+/* Split hero (texte + image) */
+.pa-hero--split{
+  background: var(--navy);
+  padding: 72px 0 88px;   /* espace haut/bas */
+  position: relative;
+}
+.pa-hero__inner{
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;  /* léger avantage au texte */
+  align-items: center;
+  gap: 36px;
+}
+.pa-hero__copy .pa-title{
+  font-size: clamp(42px, 6vw, 78px);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0 0 10px;
+  color: #fff;
+}
+.pa-hero__copy .pa-sub{
+  max-width: 560px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+  color: rgba(255,255,255,.9);
+}
+
+/* Image à droite : arrondie + ombre, comme la maquette */
+.pa-hero__media{
+  margin: 0; padding: 0;
+  border-radius: 26px;
+  overflow: hidden;              /* pour garder l’arrondi */
+  box-shadow: 0 24px 50px rgba(0,0,0,.25);
+}
+.pa-hero__media img{
+  display: block;
+  width: 100%;
+  height: clamp(260px, 38vw, 420px);  /* taille responsive */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Responsive : empile en colonne sur tablette/mobile */
+@media (max-width: 991.98px){
+  .pa-hero__inner{
+    grid-template-columns: 1fr;
+  }
+  .pa-hero__media{
+    margin-top: 18px;
+  }
+}
+/* ↓ Descendre un peu l'image du hero, version desktop */
+.pa-hero--split .pa-hero__media{
+  margin-top: clamp(18px, 3vw, 46px);   /* augmente si tu la veux plus bas */
+}
+
+/* Garde un décalage plus léger sur mobile */
+@media (max-width: 991.98px){
+  .pa-hero--split .pa-hero__media{
+    margin-top: 12px;
+  }
+}
+
+/* Optionnel : un peu plus d’air en bas du hero si besoin */
+.pa-hero--split{
+  padding-bottom: clamp(88px, 8vw, 120px);
+}
+/* ↓ Descendre l’image à droite */
+.pa-hero.pa-hero--split .pa-hero__media{
+  margin-top: 48px !important;   /* augmente si tu veux plus bas */
+}
+
+/* Optionnel: déplacer encore un peu l'image elle-même */
+.pa-hero.pa-hero--split .pa-hero__img{
+  transform: translateY(8px);     /* ajuste 0–40px selon goût */
+}
+
+/* Mobile : décalage plus léger */
+@media (max-width: 991.98px){
+  .pa-hero.pa-hero--split .pa-hero__media{ margin-top: 14px !important; }
+  .pa-hero.pa-hero--split .pa-hero__img{ transform: translateY(4px); }
+}
+/* ===== HERO split : image centrée dans la zone bleue ===== */
+.pa-hero--split { padding-block: 84px; min-height: 440px; } /* hauteur de confort */
+
+.pa-hero--split .pa-hero__inner{
+  display: grid;
+  grid-template-columns: 1fr min(50vw, 780px); /* texte | image */
+  align-items: center;                         /* ⬅️ centre verticalement */
+  gap: clamp(24px, 4vw, 56px);
+}
+
+.pa-hero--split .pa-hero__copy{
+  align-self: center;
+}
+
+.pa-hero--split .pa-hero__media{
+  margin: 0;
+  justify-self: end;        /* collé à droite dans le hero */
+  align-self: center;       /* ⬅️ centre verticalement */
+  max-width: min(50vw, 780px);
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 22px 40px rgba(0,0,0,.25);
+}
+
+.pa-hero--split .pa-hero__media img{
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Option mobile */
+@media (max-width: 992px){
+  .pa-hero--split .pa-hero__inner{
+    grid-template-columns: 1fr;       /* pile */
+  }
+  .pa-hero--split .pa-hero__media{
+    justify-self: center;             /* au centre sur mobile */
+    max-width: min(92vw, 720px);
+  }
+}
+/* ====== HERO split : image plus BAS qui coupe la zone bleue ====== */
+.pa-hero{ position: relative; overflow: visible; } /* autorise le débordement */
+
+.pa-hero--split{
+  /* quantité de descente de l'image */
+  --img-drop: 120px;                /* ← ajuste 80–160px selon ton rendu */
+  padding-bottom: calc(84px + var(--img-drop));  /* réserve la place en bas */
+}
+
+/* décale l'image vers le bas */
+.pa-hero--split .pa-hero__media{
+  transform: translateY(var(--img-drop));
+  will-change: transform;
+  z-index: 2;                       /* au-dessus du contenu suivant si besoin */
+}
+
+/* Mobile : débordement plus léger */
+@media (max-width: 992px){
+  .pa-hero--split{ --img-drop: 50px; }
+}
+/* ===== Image du hero : plus bas, sans effet visuel ===== */
+.pa-hero{ position: relative; overflow: visible; }
+
+/* contrôle de la descente (met 220–320px si tu veux encore plus bas) */
+.pa-hero--split{ --img-overdrop: 200px; padding-bottom: var(--img-overdrop); }
+
+/* place juste le CONTENEUR en bas, l'image reste intacte */
+.pa-hero--split .pa-hero__media{
+  position: absolute;
+  right: clamp(16px, 3vw, 40px);
+  bottom: calc(-1 * var(--img-overdrop)); /* déborde sous la zone bleue */
+  width: min(820px, 90vw);
+  transform: none !important;            /* annule tout transform existant */
+  filter: none !important;
+  z-index: 2;
+}
+
+/* l’image elle-même : zéro effet */
+.pa-hero--split .pa-hero__media img{
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;                    /* pas de recadrage */
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* Responsive : débordement plus léger sur mobile */
+@media (max-width: 992px){
+  .pa-hero--split{ --img-overdrop: 90px; }
+  .pa-hero--split .pa-hero__media{ width: min(640px, 88vw); right: 12px; }
+}
+/* ===== HERO split : image légèrement plus haut, sous le bleu ===== */
+.pa-hero{ 
+  position: relative; 
+  background: var(--navy); 
+  overflow: hidden;            /* coupe proprement aux bords du bleu */
+}
+
+/* règle la descente/sortie de l’image (met 40–80px selon ton goût) */
+.pa-hero--split{ 
+  --img-drop: 160px;            /* ← un peu plus en haut qu’avant */
+  padding-bottom: var(--img-drop);
+}
+
+/* le texte reste au-dessus de tout */
+.pa-hero--split .pa-hero__inner{ 
+  position: relative; 
+  z-index: 3; 
+}
+
+/* l’image : aucune transformation ni effet */
+.pa-hero--split .pa-hero__media{
+  position: absolute;
+  right: clamp(16px, 3vw, 40px);
+  bottom: calc(-1 * var(--img-drop));    /* déborde sous la zone bleue */
+    width: min(520px, 50vw);
+  z-index: 1;                             /* sous la couche bleue */
+}
+.pa-hero--split .pa-hero__media img{
+  display:block; width:100%; height:auto;
+  border:0; border-radius:0 !important;
+  box-shadow:none !important; filter:none !important; transform:none !important;
+}
+
+/* couche bleue au-dessus de la photo, sans toucher au texte */
+.pa-hero--split::after{
+  content:"";
+  position:absolute; inset:0;
+  background: var(--navy);
+  z-index: 2;                  /* cache la partie haute de l’image */
+  pointer-events:none;
+}
+
+/* Responsive : descente plus faible sur mobile */
+@media (max-width: 992px){
+  .pa-hero--split{ --img-drop: 40px; }
+  .pa-hero--split .pa-hero__media{ width: min(640px, 88vw); right: 12px; }
+}
+/* ---- Décalage uniquement de la 2ᵉ rangée (éléments 5→8) ---- */
+.pub-section .partners-logos--two-rows{
+  --row2-shift: 71px;   /* ← change SEULEMENT cette valeur */
+  --row1-up: 80px;       /* si tu avais un translateY avant, règle-le ici */
+  --row2-up: 1px;
+}
+
+@media (min-width: 992px){
+  /* 1ʳᵉ rangée : conserve l'ancien Y si besoin, X=0 */
+  .pub-section .partners-logos--two-rows > .partner-logo-link:nth-child(-n+4){
+    transform: translate3d(0, var(--row1-up), 0) !important;
+  }
+  /* 2ᵉ rangée : décale vers la droite + éventuel Y */
+  .pub-section .partners-logos--two-rows > .partner-logo-link:nth-child(n+5){
+    transform: translate3d(var(--row2-shift), var(--row2-up), 0) !important;
+  }
+}
+/* Aligner le bouton avec le texte et le garder en bas */
+.blog-card__content{
+  display:flex;            /* déjà présent, on confirme */
+  flex-direction:column;
+  padding:24px;            /* même retrait que le texte */
+  padding-bottom:24px;     /* plus besoin de gros espace pour un bouton absolu */
+}
+
+.blog-card__btn{
+  position: static !important;      /* sort du mode absolu */
+  inset: auto !important;           /* reset left/right/bottom/top */
+  align-self: flex-start;           /* aligne sur la même colonne que le texte */
+  margin-top: auto;                 /* pousse le bouton en bas du bloc */
+  display: inline-flex;             /* taille au contenu */
+  /* style existant du bouton conservé */
+}
+/* ===== Bloc A PROPOS (maquette) ===== */
+.about-fei{
+  --green:#7CAE2A;
+  --navy:#242958;
+  --ink:#d7e0d9;
+  --text:#9aa5ad;
+}
+
+/* grille 2 colonnes */
+.about-grid{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 992px){
+  .about-grid{ grid-template-columns: 1fr; }
+}
+
+/* gauche */
+.about-kicker{
+  color: var(--green);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .9rem;
+  margin-bottom: 6px;
+}
+.about-title{
+  color: #b9f08d;              /* vert clair proche de la maquette */
+  font-weight: 800;
+  font-size: clamp(26px, 4.2vw, 40px);
+  margin: 0 0 12px;
+}
+.about-lead{ color:#cbd5df; margin:0 0 6px; }
+.about-text{ color:#cbd5df; margin:0 0 14px; }
+
+.values-kicker{
+  color: var(--green);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: .85rem;
+  margin: 12px 0 10px;
+}
+.values-row{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-bottom: 10px;
+}
+.value-chip{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.value-chip .dot{
+  width:72px; height:72px; border-radius:50%;
+  background: var(--green);
+}
+.value-chip .label{
+  color:#cbd5df; font-weight:600; text-align:center; font-size:.98rem;
+}
+
+/* droite : plaque + image */
+.about-media{ position:relative; }
+.navy-plate{
+  position:absolute; inset: -14px -18px auto 22px;
+  height: 56px;                     /* bande horizontale derrière */
+  background: var(--navy);
+  border-radius: 16px;
+  z-index: 0;
+}
+.photo{
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 34px rgba(0,0,0,.25);
+  z-index: 1;
+}
+.photo img{
+  display:block; width:100%; height:auto; object-fit:cover;
+}
+
+
+
+
+
+.values-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.value-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+.about-media {
+  position: relative;
+  display: inline-block;
+}
+
+.navy-plate {
+  position: absolute;
+  
+  top: 0px;
+  left: 35px;
+  width: 300px;
+  height: 300px;
+  background-color: #1b2b57; /* bleu foncé */
+  border-radius: 12px;
+  z-index: 0;
+}
+
+/* --- image : opaque et au-dessus de la plaque --- */
+.about-image-box{
+  position: relative;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;          /* empêche toute transparence */
+  z-index: 2;                /* au-dessus du bleu */
+}
+.about-image-box img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  opacity: 1 !important;           /* opaque */
+  mix-blend-mode: normal !important;
+  filter: none !important;
+}
+
+/* --- plaque bleue : un peu plus haut --- */
+.navy-plate{
+  position: absolute;
+  top: -12px;                /* ← monte/descends en changeant SEULEMENT cette valeur */
+  left: 25px;
+  width: 300px;
+  height: 300px;
+  background-color: #1b2b57;
+  border-radius: 12px;
+  z-index: 1;                /* sous l’image */
+}
+/* ↑ juste un peu plus grand */
+.about-image-box,
+.navy-plate{
+  width: 360px;   /* ← mets 340/360/380 selon ton goût */
+  height: 360px;
+}
+/* place CE BLOC tout à la fin de ton CSS */
+:root{ --about-shift-x: 118px; }          /* ← change juste cette valeur */
+
+.about-fei .about-media{
+  position: relative;                     /* déjà présent, mais on s’assure */
+  left: var(--about-shift-x) !important;  /* pousse le bloc vers la gauche */
+}
+/* ===== Bannière bas : vidéo à gauche ===== */
+.sv-bottom-banner{ position: relative; overflow: hidden; }
+.sv-bottom-banner .banner-bg{
+  width: 100%; height: auto; display: block; object-fit: cover;
+}
+
+/* Cadre vidéo à gauche, posé sur l'image */
+.sv-banner-video-left{
+  position: absolute;
+  left: min(4vw, 40px);         /* marge gauche */
+  bottom: min(4vw, 40px);       /* marge bas */
+  width: clamp(280px, 35vw, 520px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(0,0,0,.28);
+  z-index: 15;                  /* au-dessus de l'image, sous/à côté du texte */
+}
+
+/* Conteneur ratio sans dépendre de Bootstrap */
+.ratio-16x9{ position: relative; width: 100%; padding-top: 56.25%; }
+.ratio-16x9 iframe{
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+}
+
+/* Wrapper à droite (texte au-dessus du bouton) — tes règles existantes conservées */
+.sv-banner-right{
+  position: absolute;
+  right: min(40vw, 200px);
+  bottom: min(30vw, 208px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;          /* même largeur texte/bouton */
+  max-width: min(408ch, 420vw);
+  z-index: 20;
+  --sv-space: 24px;              /* espace texte-bouton (plus raisonnable que 210px) */
+  gap: var(--sv-space);
+}
+.sv-banner-copy{ text-align: right; }
+.sv-banner-titlee{
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(20px, 2.2vw, 28px); /* taille titre plus réaliste */
+  line-height: 1.15;
+  color: #0f172a;
+}
+.sv-banner-subb{
+  margin: 2px 0 0;
+  font-size: clamp(13px, 1.3vw, 16px);
+  line-height: 1.4;
+  color: #334155;
+  text-align: right;
+}
+
+/* Bouton, aligné à droite dans la même largeur que le texte */
+.sv-banner-ctaa{
+  display: flex;
+  justify-content: flex-end;
+  align-self: stretch;
+  transform: translateY(0);
+  transition: transform .15s ease, filter .15s ease;
+}
+.sv-banner-ctaa:hover{ transform: translateY(-2px); filter: brightness(1.02); }
+.sv-banner-ctaa img{
+  display: block;
+  height: auto;
+  max-width: clamp(140px, 18vw, 220px);
+}
+
+/* RWD: centre tout et empile proprement */
+@media (max-width: 575.98px){
+  .sv-banner-video-left{
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 16px;
+    width: min(92vw, 520px);
+  }
+  .sv-banner-right{
+    right: 50%;
+    transform: translateX(50%);
+    bottom: calc(16px + min(92vw, 520px) * 0.5625 + 16px); /* place le texte sous la vidéo */
+    align-items: center;
+    text-align: center;
+    max-width: 88%;
+  }
+  .sv-banner-titlee, .sv-banner-subb{ text-align: center; }
+  .sv-banner-ctaa{ align-self: auto; justify-content: center; }
+}
+/* Slot à gauche (même position que la vidéo d'avant) */
+.sv-banner-slot-left{
+  position: absolute;
+  left: min(4vw, 40px);
+  bottom: min(4vw, 40px);
+  width: clamp(280px, 35vw, 520px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(0,0,0,.28);
+  z-index: 15;
+}
+
+/* Conteneur ratio */
+.ratio-16x9{ position: relative; width: 100%; padding-top: 56.25%; }
+.ratio-16x9 > iframe{
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+}
+
+/* Image fallback dans le même cadre */
+.sv-slot-img > img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block; border: 0;
+}
+
+/* Mobile: on centre le slot et on place le texte dessous */
+@media (max-width: 575.98px){
+  .sv-banner-slot-left{
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 16px;
+    width: min(92vw, 520px);
+  }
+  .sv-banner-right{
+    right: 50%;
+    transform: translateX(50%);
+    bottom: calc(16px + min(92vw, 520px) * 0.5625 + 16px);
+    align-items: center;
+    text-align: center;
+    max-width: 88%;
+  }
+  .sv-banner-titlee, .sv-banner-subb{ text-align: center; }
+  .sv-banner-ctaa{ align-self: auto; justify-content: center; }
+}
+/* ↑ Plus grand + plus haut */
+.sv-banner-slot-left{
+  position: absolute;
+  left: min(3vw, 24px);           /* un poil plus près du bord gauche */
+  bottom: min(8vw, 96px);         /* ↑ monte la vidéo (augmentation = plus haut) */
+  width: clamp(320px, 42vw, 680px);/* plus large (avant: 280/35vw/520) */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(0,0,0,.28);
+  z-index: 15;
+}
+@media (max-width: 575.98px){
+  .sv-banner-slot-left{
+    bottom: 32px;                 /* ↑ au lieu de 16px */
+    width: min(96vw, 620px);      /* un peu plus large en mobile */
+  }
+  .sv-banner-right{
+    bottom: calc(32px + min(96vw, 620px) * 0.5625 + 20px); /* garde l'empilement propre */
+  }
+}
+.value-chip .label {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #000; /* texte noir */
+    font-weight: 500;
+}
+.value-chip.lower {
+    margin-top: 8px; /* ajuste la valeur comme tu veux */
+}
+.value-chip.lowerr {
+    margin-top: 5px; /* ajuste la valeur comme tu veux */
+}

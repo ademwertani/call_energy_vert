@@ -1,0 +1,186 @@
+/* =========================================================
+   SKY BAND + CENTERED WHITE PILL NAV - Updated with Figma colors and background image
+   ========================================================= */
+
+/* Unified header with dark blue background and semi-transparent overlay */
+.unified-header {
+  background-image: url("../img/hero-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  padding: 0.6rem 0 64px;
+}
+
+/* Added semi-transparent overlay as pseudo-element */
+.unified-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(45, 50, 129, 0.4), rgba(45, 50, 129, 0.6));
+  z-index: 1;
+}
+
+/* Ensure content appears above overlay */
+.unified-header > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Topbar section within unified header */
+.topbar-section {
+  padding: 0.6rem 0 1.2rem;
+}
+
+.topbar-section .topbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Socials (left) */
+.topbar-section .topbar-social {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.topbar-section .topbar-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.topbar-section .topbar-social a i {
+  font-size: 16px;
+  line-height: 1;
+}
+.topbar-section .topbar-social a:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Contact (right) */
+.topbar-section .topbar-info {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.topbar-section .info-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.topbar-section .badge-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent); /* Using Figma accent orange */
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08) inset;
+}
+.topbar-section .badge-icon i {
+  font-size: 14px;
+  line-height: 1;
+}
+.topbar-section .info-text {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Pill navbar sits above the primary strip */
+.nav-pill.nav-pill-bar {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+  padding: 12px 18px;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: calc(100% - 40px);
+}
+
+/* Keep brand + nav sizing close to reference */
+.navbar-aisla .navbar-brand img {
+  height: 54px;
+}
+.navbar-aisla .navbar-nav .nav-link {
+  color: var(--dark); /* Using Figma dark color */
+  padding: 12px 18px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+.navbar-aisla .navbar-nav .nav-link.active {
+  background: #37a7df; /* Secondary blue for active state */
+  color: #fff !important;
+}
+
+/* Search button updated with Figma colors */
+.navbar-aisla .search-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border); /* Using Figma border color */
+  background: #fff;
+  color: var(--primary); /* Using Figma primary color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-aisla .search-btn:hover {
+  background: var(--light); /* Using Figma light color */
+}
+
+/* CTA button updated with Figma accent color */
+.navbar-aisla .cta-btn {
+  background: var(--accent); /* Using Figma accent orange */
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+.navbar-aisla .cta-btn:hover {
+  background: var(--danger); /* Using Figma danger color for hover */
+}
+
+/* Mobile tweaks */
+@media (max-width: 991.98px) {
+  .unified-header {
+    padding: 12px 0 28px;
+  }
+  .unified-header::after {
+    height: 42px;
+  }
+  .nav-pill.nav-pill-bar {
+    border-radius: 24px;
+    padding: 10px 12px;
+  }
+  .topbar-section {
+    padding: 0.5rem 0 1rem;
+  }
+  .topbar-section .topbar-row {
+    gap: 16px;
+  }
+  .topbar-section .topbar-social {
+    gap: 18px;
+  }
+  .topbar-section .topbar-info {
+    gap: 18px;
+  }
+}
