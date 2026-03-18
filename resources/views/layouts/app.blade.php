@@ -33,8 +33,9 @@
 <body>
   @include('partials.spinner')
   @include('partials.navbar')
-  @include('partials.page-header')
-
+@if (request()->routeIs(['home', 'projects.sectors']))
+    @include('partials.page-header')
+@endif
   <main>
     @yield('content')
   </main>

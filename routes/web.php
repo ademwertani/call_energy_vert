@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\Admin\YoutubeVideoController;
 use App\Http\Controllers\Admin\CertificatController;  // Importer le contrôleur des certificats
-
+use App\Http\Controllers\SecteurController;
 // ===================== PAGES PUBLIQUES =====================
 Route::get('/etude-eclairage', fn () => view('pages.etude-eclairage'))->name('lighting.study');
 Route::get('/bilan-carbone', fn () => view('pages.bilan-carbone'))->name('bilan-carbone');
@@ -48,7 +48,7 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
 
-Route::get('/projects/sectors', [ProjectController::class, 'sectors'])->name('projects.sectors');
+Route::get('/secteurs', [SecteurController::class, 'index'])->name('projects.sectors');
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 

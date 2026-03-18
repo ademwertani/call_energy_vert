@@ -1,279 +1,262 @@
 @php
-    use App\Models\Banner;
-    use Illuminate\Support\Str;
+use App\Models\Banner;
+use Illuminate\Support\Str;
 
-    // Récupérer jusqu'à 4 bannières
-    $banners = Banner::orderByDesc('created_at')
-        ->take(4)
-        ->get();
+$banners = Banner::orderBy('created_at')->take(10)->get();
 
-    // Fallback si aucune bannière
-    if ($banners->isEmpty()) {
-        $banners = collect([ 
-            (object)[
-                'title' => 'Call Énergie Vert',
-                'image' => 'img/hero-bg-energy.png',
-                'summary' => 'Votre partenaire de confiance en relation client & externalisation',
-                'description' => 'Centre de contact offshore et acteur BPO, spécialisé dans la gestion de la relation client et les services dédiés au secteur de l\'énergie et de l\'efficacité énergétique.',
-            ]
-        ]);
+if ($banners->isEmpty()) {
+    $banners = collect([
+        (object)[
+            'title' => 'Call Énergie Vert',
+            'image' => 'img/hero-bg-energy.png',
+            'summary' => 'Votre partenaire de confiance en relation client & externalisation',
+            'description' => 'Centre de contact offshore et acteur BPO spécialisé dans la gestion de la relation client et les services liés à l’énergie.',
+        ]
+    ]);
+}
+
+$homeBanner = $banners->first();
+$secteurBanners = $banners->slice(1)->values();
+
+if ($secteurBanners->isEmpty()) {
+    $secteurBanners = collect([$homeBanner]);
+}
+
+function heroImage($image) {
+    if (!$image) {
+        return asset('img/hero-bg-energy.png');
     }
 
-    // Première bannière
-    $firstBanner = $banners->first();
+    if (Str::startsWith($image, ['http://','https://'])) {
+        return $image;
+    }
 
-    // Image du hero
-    $heroImg = $firstBanner->image
-        ? (Str::startsWith($firstBanner->image, ['http://','https://'])
-            ? $firstBanner->image
-            : asset('storage/' . ltrim($firstBanner->image, '/')))
-        : asset('img/hero-bg-energy.png');
+    if (Str::startsWith($image,'img/')) {
+        return asset($image);
+    }
 
-    // Titre, Summary et Description
-    $heroTitle = $firstBanner->title ?: 'Notre blog';
-    $heroSummary = $firstBanner->summary ?? '';
-    $heroDescription = $firstBanner->description ?? '';
-
-    // Payload pour JS
-    $bannersPayload = $banners->map(function ($b) {
-        $imgPath = $b->image
-            ? (Str::startsWith($b->image, ['http://','https://'])
-                ? $b->image
-                : asset('storage/' . ltrim($b->image, '/')))
-            : asset('img/hero-bg-energy.png');
-
-        return [
-            'title' => $b->title ?: 'Notre blog',
-            'image' => $imgPath,
-            'summary' => $b->summary ?? '',
-            'description' => $b->description ?? '',
-        ];
-    })->values();
-
-    $bannersJson = $bannersPayload->toJson();
+    return asset('storage/' . ltrim($image,'/'));
+}
 @endphp
 
 <style>
-/* =========================================================
-   France Isolation – Header Style (Grand, centré)
-   ========================================================= */
-   
-.page-blog{
-  --navy:#242958;
-  --navyDark:#1d2760;
-  --sky:#7CAE2A;
-  --accent:#7CAE2A;
-  --ink:#020617;
-  --muted:#6b7280;
-  --card:#ffffff;
-}
-.page-blog *{box-sizing:border-box}
-
-/* ---------- TYPO ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800;900&display=swap');
-
-/* =========================================================
-   HERO – Grande taille, plein écran
-   ========================================================= */
-.pb-hero{
-  position: relative;
-  color:#fff;
-
-  /* ✅ GRANDE HAUTEUR */
-  width: 100%;
-  height: 680px;
-  min-height: 600px;
-  padding: 0;
-
-  overflow: hidden;
-  z-index: 1;
-
-  /* Centrer le contenu */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  background-color: #0b172f;
-  
-  /* Image de fond */
-  background-image: var(--hero-bg-img, none);
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat;
+.pb-hero,
+.pb-slide{
+    width:100%;
+    height:680px;
+    min-height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 }
 
-/* ❌ SUPPRIMÉ: overlay sombre - image propre */
-
-/* Conteneur du texte */
 .pb-hero__inner{
-  position: relative;
-  z-index: 2;
-  max-width: 750px;
-  padding: 0 24px;
+    max-width:900px;
+    padding:0 24px;
 }
 
-/* Titre principal */
-.pb-title{
-  font-family: "Epilogue", system-ui, -apple-system, sans-serif !important;
-  font-size: clamp(38px, 5.5vw, 64px);
-  line-height: 1.1;
-  font-weight: 800;
-  margin: 0 0 20px;
-  color: #fff !important;
-  text-shadow: 0 4px 30px rgba(0,0,0,0.6);
-  letter-spacing: -0.5px;
+/* HOME */
+.pb-hero__inner--home{
+    text-align:center;
 }
 
-/* Sous-titre */
-.pb-summary{
-  font-family: "Epilogue", system-ui, -apple-system, sans-serif !important;
-  font-size: clamp(18px, 2vw, 22px);
-  line-height: 1.5;
-  font-weight: 500;
-  margin: 0 0 16px;
-  color: #fff !important;
-  opacity: .95;
-  text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+.pb-title-home{
+    font-size:72px;
+    font-weight:900;
+    line-height:1.05;
+    margin-bottom:18px;
+    color:#fff;
+    text-shadow:0 4px 30px rgba(0,0,0,.6);
 }
 
-/* Description */
-.pb-desc{
-  font-family: "Epilogue", system-ui, -apple-system, sans-serif !important;
-  font-size: clamp(15px, 1.5vw, 17px);
-  line-height: 1.75;
-  font-weight: 400;
-  margin: 0 0 36px;
-  color: #fff !important;
-  opacity: .9;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
+.pb-summary-home{
+    font-size:18px;
+    font-weight:500;
+    line-height:1.6;
+    margin-bottom:28px;
+    color:#fff;
+    text-shadow:0 2px 18px rgba(0,0,0,.45);
 }
 
-/* Boutons */
+.pb-desc-home{
+    font-size:16px;
+    line-height:1.7;
+    margin-bottom:35px;
+    color:#f7f7f7;
+}
+
+/* SECTEURS */
+.pb-hero__inner--secteurs{
+    text-align:left;
+    margin-left:0;
+    margin-right:auto;
+    max-width:860px;
+}
+
+.pb-title-secteur{
+    font-size:70px;
+    font-weight:900;
+    line-height:1.02;
+    margin:0 0 14px 0;
+    color:#fff;
+    text-shadow:0 4px 30px rgba(0,0,0,.6);
+}
+
+.pb-summary-secteur{
+    font-size:20px;
+    font-weight:500;
+    line-height:1.6;
+    margin:0;
+    color:#d1d5db;
+    text-shadow:0 2px 14px rgba(0,0,0,.35);
+}
+
 .pb-hero__buttons{
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 0;
-  flex-wrap: wrap;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
 }
 
 .pb-btn{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 40px;
-  font-family: "Epilogue", system-ui, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
+    padding:16px 40px;
+    border-radius:40px;
+    text-decoration:none;
+    font-weight:700;
+    background:#fff;
+    color:#7CAE2A;
+    transition:.3s;
+    display:inline-block;
 }
 
-.pb-btn--primary{
-  background: #fff;
-  color: #7CAE2A;
-  box-shadow: 0 4px 20px rgba(255,255,255,0.3);
+.pb-btn:hover{
+    transform:translateY(-3px);
+    color:#7CAE2A;
 }
 
-.pb-btn--primary:hover{
-  background: #f8f8f8;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(255,255,255,0.4);
+#secteursCarousel .carousel-item{
+    transition:opacity 1s ease-in-out;
 }
 
-.pb-btn--secondary{
-  background: #7CAE2A;
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(124,174,42,0.4);
+@media(max-width:992px){
+    .pb-title-home{
+        font-size:56px;
+    }
+
+    .pb-title-secteur{
+        font-size:54px;
+    }
+
+    .pb-summary-secteur{
+        font-size:18px;
+    }
 }
 
-.pb-btn--secondary:hover{
-  background: #6a9d22;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(124,174,42,0.5);
+@media(max-width:768px){
+    .pb-title-home{
+        font-size:40px;
+    }
+
+    .pb-summary-home{
+        font-size:16px;
+    }
+
+    .pb-desc-home{
+        font-size:14px;
+    }
+
+    .pb-title-secteur{
+        font-size:40px;
+    }
+
+    .pb-summary-secteur{
+        font-size:16px;
+    }
+
+    .pb-hero,
+    .pb-slide{
+        height:500px;
+        min-height:460px;
+    }
+
+    .pb-hero__buttons{
+        gap:12px;
+    }
+
+    .pb-btn{
+        padding:14px 28px;
+    }
 }
 
-.pb-hero__media{display:none !important;}
+@media(max-width:576px){
+    .pb-title-home{
+        font-size:32px;
+    }
 
-/* Styles responsives */
-@media (max-width: 992px){
-  .pb-hero{
-    height: 600px;
-    min-height: 500px;
-  }
-  .pb-hero__buttons{
-    gap: 16px;
-  }
-}
+    .pb-title-secteur{
+        font-size:32px;
+    }
 
-@media (max-width: 768px){
-  .pb-hero{
-    height: 550px;
-    min-height: 450px;
-  }
-  .pb-hero__buttons{
-    flex-direction: column;
-    align-items: center;
-  }
-  .pb-btn{
-    width: 100%;
-    max-width: 260px;
-  }
-}
-
-@media (max-width: 575.98px){
-  .pb-hero{
-    height: 500px;
-    min-height: 400px;
-  }
-  .pb-title{
-    font-size: clamp(28px, 8vw, 36px);
-    margin-bottom: 16px;
-  }
-  .pb-summary{
-    font-size: 16px;
-    margin-bottom: 12px;
-  }
-  .pb-desc{
-    font-size: 14px;
-    margin-bottom: 28px;
-  }
-  .pb-btn{
-    padding: 14px 32px;
-    font-size: 13px;
-  }
+    .pb-summary-home,
+    .pb-summary-secteur{
+        font-size:14px;
+    }
 }
 </style>
 
 <section class="page-blog">
-  <header class="pb-hero"
-          style="--hero-bg-img: url('{{ $heroImg }}');">
-    <div class="container pb-hero__inner">
-      
-      <h1 class="pb-title">{{ $heroTitle }}</h1>
-      
-      @if($heroSummary)
-      <p class="pb-summary">{{ $heroSummary }}</p>
-      @endif
-      
-      @if($heroDescription)
-      <p class="pb-desc">{{ $heroDescription }}</p>
-      @endif
-      
-      <div class="pb-hero__buttons">
-        <a href="#contact" class="pb-btn pb-btn--primary">Nous contacter</a>
-        <a href="#services" class="pb-btn pb-btn--primary">Nos services</a>
-      </div>
-      
+
+{{-- ================= HOME ================= --}}
+@if(request()->routeIs('home'))
+<header class="pb-hero" style="background-image:url('{{ heroImage($homeBanner->image) }}')">
+    <div class="pb-hero__inner pb-hero__inner--home">
+
+        <h1 class="pb-title-home">{{ $homeBanner->title }}</h1>
+
+        @if($homeBanner->summary)
+            <p class="pb-summary-home">{{ $homeBanner->summary }}</p>
+        @endif
+
+        <div class="pb-hero__buttons">
+            <a href="{{ route('contact.create') }}" class="pb-btn">Nous contacter</a>
+            <a href="{{ route('services.index') }}" class="pb-btn">Nos services</a>
+        </div>
+
     </div>
-  </header>
+</header>
+@endif
+
+{{-- ================= SECTEURS ================= --}}
+@if(request()->routeIs('projects.sectors'))
+<div id="secteursCarousel"
+class="carousel slide carousel-fade"
+data-bs-ride="carousel"
+data-bs-interval="5000"
+data-bs-pause="false">
+
+    <div class="carousel-inner">
+        @foreach($secteurBanners as $index => $banner)
+            <div class="carousel-item {{ $index==0 ? 'active' : '' }}">
+                <div class="pb-slide" style="background-image:url('{{ heroImage($banner->image) }}')">
+                    <div class="pb-hero__inner pb-hero__inner--secteurs">
+
+                        <h1 class="pb-title-secteur">{{ $banner->title }}</h1>
+
+                        @if($banner->summary)
+                            <p class="pb-summary-secteur">{{ $banner->summary }}</p>
+                        @endif
+
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+</div>
+@endif
+
 </section>
