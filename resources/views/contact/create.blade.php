@@ -4,312 +4,626 @@
 
 @section('content')
 <style>
-/* =========================================================
-   Call energie vert – Contact
-   ========================================================= */
 .contact-page{
-  --navy:#242958;
-  --navyDark:#1d2760;
-  --sky:#7CAE2A;
-  --accent:#7CAE2A;
-  --ink:#0f172a;
-  --muted:#6b7280;
-  --field:#f5f7fb;
-  --ring:#dbe6ff;
-  --card:#ffffff;
-  --shadow:0 20px 40px rgba(16,24,40,.08);
-}
-.contact-page *{box-sizing:border-box}
-
-/* ---------- HERO ---------- */
-.cp-hero{
-  background:var(--navy);
-  color:#fff;
-  padding:78px 0 92px;
-  position:relative;
-  overflow:visible;
-  z-index:5;
-}
-.cp-hero .cp-hgroup{max-inline-size:1100px;margin:0 auto;padding:0 12px}
-.cp-title{
-  font-size:56px; line-height:1.05; font-weight:800; margin:0 0 10px;
-}
-.cp-hero h1,
-.cp-hero .cp-title,
-.cp-hero p,
-.cp-hero .cp-sub{ color:#fff !important; }
-@media (max-width:768px){ .cp-title{font-size:40px} }
-.cp-sub{
-  max-inline-size:560px; font-size:15px; line-height:1.7; margin:0; opacity:.95;
+    --green:#10a545;
+    --green-dark:#0d8d3b;
+    --black:#000000;
+    --white:#ffffff;
+    --soft-white:#f3f3f3;
+    --text:#111111;
+    --gold:#d8b43c;
+    --danger:#ff6b6b;
+    --success-bg:#d1fae5;
+    --success-text:#065f46;
+    --success-border:#a7f3d0;
 }
 
-/* ---------- SECTION HEAD ---------- */
-.cp-wrap{padding:70px 0 40px}
-.cp-head{max-inline-size:820px;margin:0 auto 8px;text-align:center}
-.cp-kicker{color:var(--sky);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.85rem}
-.cp-h1{color:var(--ink);font-weight:800;line-height:1.14;margin:8px 0 0}
-
-/* ---------- GRID ---------- */
-.cp-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:28px;align-items:start;margin-block-start:26px}
-@media (max-width: 991.98px){.cp-grid{grid-template-columns:1fr}}
-
-/* ---------- FORM CARD ---------- */
-.cp-card{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:28px}
-.cp-form .form-control,
-.cp-form .form-select{
-  background:var(--field)!important; border:1px solid #e6e9f5!important; border-radius:12px!important;
-  padding:14px 16px!important; font-size:1rem;
-}
-.cp-form .form-control:focus,
-.cp-form .form-select:focus{
-  background:#fff!important;border-color:var(--ring)!important;box-shadow:none!important
-}
-.cp-form textarea.form-control{min-block-size:160px;resize:vertical}
-.cp-btn{
-  background:var(--accent); border:none; color:#fff; font-weight:800;
-  padding:14px 22px; border-radius:14px; transition:.2s;
-}
-.cp-btn:hover{transform:translateY(-1px);filter:brightness(.98)}
-.contact-page .alert-success{border-radius:12px}
-
-/* ---------- INFO CARDS ---------- */
-.cp-aside{display:flex;flex-direction:column;gap:18px}
-.cp-info{
-  background:#242e77; color:#fff; border-radius:18px; box-shadow:0 8px 18px rgba(0,0,0,.08);
-  padding:22px; display:flex; gap:16px; align-items:flex-start;
-}
-.cp-ico{
-  inline-size:56px; block-size:56px; border-radius:50%; display:grid; place-items:center;
-  background:var(--accent); color:#fff; font-size:22px; flex-shrink:0;
-}
-.cp-info h5{ margin:0 0 6px; font-weight:800; font-size:1rem; color:#fff !important; }
-.cp-info a{ color:#d8e6ff; text-decoration:none; font-weight:600 }
-.cp-info a:hover{ text-decoration:underline }
-
-/* ---------- MAP ---------- */
-.cp-map{margin-block-start:34px;background:#f4f7ff;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.06);padding:10px}
-.cp-map iframe{inline-size:100%;block-size:440px;border:0;border-radius:12px}
-
-/* ---------- HERO IMAGE SPLIT (overrides) ---------- */
-.contact-page header.cp-hero{
-  padding: var(--cp-hero-pad, 190px) 0 !important;
-  margin-block-start: var(--cp-hero-offset, 24px) !important;
-}
-.contact-page header.cp-hero.cp-hero--split{
-  margin-block-end: var(--cp-img-drop, 60px) !important;
-}
-.contact-page header.cp-hero .cp-hero__inner{
-  position: relative;
-  transform: translateX(var(--cp-copy-x, -48px));
-}
-@media (max-width: 992px){
-  .contact-page header.cp-hero .cp-hero__inner{ transform: none; }
-}
-.contact-page header.cp-hero .cp-hero__media{
-  position: absolute !important;
-  inset-inline-end: var(--cp-img-right, 77px) !important;
-  inset-block-end: calc(-1 * var(--cp-img-drop, 60px)) !important;
-  inline-size: var(--cp-img-w, 600px) !important;
-  block-size: var(--cp-img-h, 380px) !important;
-  border-radius: var(--cp-img-radius, 18px) !important;
-  overflow: hidden !important;
-  z-index: 4 !important;
-}
-.contact-page header.cp-hero .cp-hero__media img{
-  inline-size: 100% !important;
-  block-size: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
+/* ================= FORM TOP ================= */
+.offer-form-section,
+.partner-form-section{
+    display:none;
+    background:#fff;
+    padding:20px 20px 60px;
 }
 
-/* Mobile tweaks */
-@media (max-width: 575.98px){
-  .cp-hero__media{
-    position: relative !important;
-    inset-block-start: 115px !important;
-    inset-inline-start: -10px !important;
-  }
-  .cp-hero__media img{
-    display:block !important;
-    inline-size:auto !important;
-    max-inline-size:90% !important;
-  }
+.offer-form-section.show,
+.partner-form-section.show{
+    display:block;
+}
 
-  .cp-aside{
-    transform: translateX(-15px) !important;
-    font-size: .85rem !important;
-  }
-  .cp-info{
-    padding:6px 0 !important;
-  }
-  .cp-info .cp-ico i{
-    font-size:1rem !important;
-    inline-size:28px !important;
-    block-size:28px !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-  }
-  .cp-info h5{font-size:.85rem !important;margin-block-end:2px !important;}
-  .cp-info a{font-size:.82rem !important;line-height:1.2 !important;}
+.offer-form-box,
+.partner-form-box{
+    max-width:980px;
+    margin:0 auto;
+    background:#000;
+    border:1.5px solid var(--gold);
+    border-radius:34px;
+    padding:38px 34px 36px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.offer-close-wrap,
+.partner-close-wrap{
+    text-align:right;
+    margin-bottom:16px;
+}
+
+.offer-close,
+.partner-close{
+    background:transparent;
+    color:#fff;
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:999px;
+    width:42px;
+    height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.1rem;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.offer-close:hover,
+.partner-close:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+.offer-form-title,
+.partner-form-title{
+    color:var(--green);
+    font-size:2rem;
+    font-weight:800;
+    margin:0 0 28px;
+    line-height:1.3;
+}
+
+.offer-form-desc,
+.partner-form-desc{
+    color:#fff;
+    font-size:1.08rem;
+    line-height:1.55;
+    max-width:820px;
+    margin-bottom:28px;
+}
+
+.offer-grid,
+.partner-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin-bottom:22px;
+}
+
+.offer-field-full,
+.partner-field-full{
+    grid-column:1 / -1;
+}
+
+.offer-input,
+.partner-input,
+.offer-textarea,
+.partner-textarea{
+    width:100%;
+    border:1px solid #d8d8d8;
+    background:#f1f1f1;
+    color:#666;
+    border-radius:999px;
+    padding:18px 28px;
+    font-size:1rem;
+    outline:none;
+    box-shadow:none;
+}
+
+.offer-input::placeholder,
+.partner-input::placeholder,
+.offer-textarea::placeholder,
+.partner-textarea::placeholder{
+    color:#757575;
+}
+
+.offer-textarea,
+.partner-textarea{
+    border-radius:28px;
+    min-height:135px;
+    resize:vertical;
+    padding-top:22px;
+}
+
+.offer-input.input-error,
+.partner-input.input-error,
+.offer-textarea.input-error,
+.partner-textarea.input-error{
+    border:1px solid var(--danger);
+}
+
+.partner-documents{
+    width:100%;
+    border:1px solid #d8d8d8;
+    background:#f1f1f1;
+    color:#666;
+    border-radius:28px;
+    padding:20px 26px;
+    font-size:1rem;
+    min-height:90px;
+}
+
+.partner-documents p{
+    margin:0 0 6px;
+    color:#666;
+}
+
+.partner-documents ul{
+    margin:0;
+    padding-left:22px;
+    color:#666;
+}
+
+.field-error{
+    color:var(--danger);
+    font-size:.88rem;
+    margin-top:8px;
+    padding-left:10px;
+}
+
+.offer-note,
+.partner-note{
+    color:#fff;
+    font-size:1rem;
+    margin:28px 0 34px;
+    padding-left:14px;
+}
+
+.offer-submit,
+.partner-submit{
+    min-width:280px;
+    padding:18px 30px;
+    border-radius:999px;
+    background:var(--green);
+    color:#fff;
+    font-weight:800;
+    font-size:1.1rem;
+    border:none;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.offer-submit:hover,
+.partner-submit:hover{
+    background:var(--green-dark);
+    transform:translateY(-2px);
+}
+
+.offer-alert-success,
+.partner-alert-success{
+    background:var(--success-bg);
+    color:var(--success-text);
+    border:1px solid var(--success-border);
+    padding:14px 18px;
+    border-radius:14px;
+    font-weight:600;
+    margin-bottom:22px;
+}
+
+.offer-alert-error,
+.partner-alert-error{
+    background:#2b1111;
+    color:#ffd6d6;
+    border:1px solid rgba(255,107,107,.45);
+    padding:14px 18px;
+    border-radius:14px;
+    margin-bottom:22px;
+}
+
+.offer-alert-error ul,
+.partner-alert-error ul{
+    margin:0;
+    padding-left:18px;
+}
+
+/* ================= HERO ================= */
+.contact-hero{
+    position:relative;
+    height:520px;
+    background:url('{{ asset("img/contact-hero.png") }}') center/cover no-repeat;
+    overflow:hidden;
+}
+
+.contact-hero-overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:50%;
+    background:rgba(255,255,255,0.65);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+.contact-hero-content{
+    max-width:850px;
+}
+
+.contact-hero-content h1{
+    font-size:clamp(1.35rem, 2vw, 1.95rem);
+    line-height:1.5;
+    font-weight:700;
+    color:#111;
+    margin:0;
+}
+
+.contact-hero-content .highlight{
+    color:var(--green);
+    font-weight:800;
+}
+
+/* ================= BUTTONS ================= */
+.contact-actions{
+    background:#fff;
+    padding:30px 20px 40px;
+    text-align:center;
+}
+
+.contact-actions-wrap{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.contact-btn{
+    min-width:190px;
+    padding:14px 28px;
+    border-radius:999px;
+    background:var(--green);
+    color:#fff;
+    font-weight:700;
+    text-decoration:none;
+    transition:0.25s;
+    border:none;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.contact-btn:hover{
+    background:var(--green-dark);
+    transform:translateY(-2px);
+    color:#fff;
+}
+
+/* ================= WHITE SPACE ================= */
+.contact-space{
+    height:180px;
+    background:#fff;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:991px){
+    .offer-grid,
+    .partner-grid{
+        grid-template-columns:1fr;
+    }
+
+    .offer-field-full,
+    .partner-field-full{
+        grid-column:auto;
+    }
+}
+
+@media (max-width:768px){
+    .contact-hero{
+        height:420px;
+    }
+
+    .contact-hero-overlay{
+        height:50%;
+        padding:18px;
+    }
+
+    .contact-hero-content h1{
+        font-size:1.2rem;
+        line-height:1.45;
+    }
+
+    .contact-space{
+        height:120px;
+    }
+
+    .offer-form-box,
+    .partner-form-box{
+        padding:24px 18px 24px;
+        border-radius:24px;
+    }
+
+    .offer-form-title,
+    .partner-form-title{
+        font-size:1.55rem;
+        margin-bottom:18px;
+    }
+
+    .offer-form-desc,
+    .partner-form-desc{
+        font-size:1rem;
+        margin-bottom:20px;
+    }
+
+    .offer-input,
+    .partner-input,
+    .offer-textarea,
+    .partner-textarea{
+        padding:16px 20px;
+        font-size:.95rem;
+    }
+
+    .offer-submit,
+    .partner-submit{
+        width:100%;
+        min-width:auto;
+    }
 }
 </style>
 
 <section class="contact-page">
 
-  {{-- CONTENT --}}
-  <div class="cp-wrap">
-    <div class="container">
-
-      <div class="cp-head">
-        <div class="cp-kicker">Demande d'étude </div>
-        <h2 class="cp-h1">
-          Parlons de la façon dont nous pouvons vous aider
-        </h2>
-
-        @if(session('success'))
-          <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
-          </div>
-        @endif
-      </div>
-
-      <div class="cp-grid">
-
-        {{-- FORMULAIRE --}}
-        <div class="cp-card">
-          <form method="POST" action="{{ route('contact.store') }}" class="cp-form">
-            @csrf
-
-            <div class="row g-3">
-              {{-- Raison Sociale --}}
-              <div class="col-md-12">
-                <input type="text"
-                       name="company_name"
-                       value="{{ old('company_name') }}"
-                       class="form-control @error('company_name') is-invalid @enderror"
-                       placeholder="Raison Sociale"
-                       required>
-                @error('company_name') <div class="invalid-feedback">{{ $message }}</div> @enderror
-              </div>
-
-              {{-- Numéro SIRET --}}
-              <div class="col-md-12">
-                <input type="text"
-                       name="siret"
-                       value="{{ old('siret') }}"
-                       class="form-control @error('siret') is-invalid @enderror"
-                       placeholder="Numéro de SIRET (14 chiffres)"
-                       pattern="\d{14}"
-                       required>
-                @error('siret') <div class="invalid-feedback">{{ $message }}</div> @enderror
-              </div>
-
-              {{-- E-mail --}}
-              <div class="col-md-6">
-                <input type="email"
-                       name="email"
-                       value="{{ old('email') }}"
-                       class="form-control @error('email') is-invalid @enderror"
-                       placeholder="Adresse e-mail"
-                       required>
-                @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
-              </div>
-
-              {{-- Téléphone --}}
-              <div class="col-md-6">
-                <input type="text"
-                       name="phone"
-                       value="{{ old('phone') }}"
-                       class="form-control @error('phone') is-invalid @enderror"
-                       placeholder="Téléphone (facultatif)">
-                @error('phone') <div class="invalid-feedback">{{ $message }}</div> @enderror
-              </div>
-
-              {{-- Sujet --}}
-              <div class="col-12">
-                <select name="subject" class="form-select @error('subject') is-invalid @enderror" required>
-                  <option value="">Sélectionnez un sujet</option>
-                  <option value="etude_eclairage_interieur" {{ old('subject') == 'etude_eclairage_interieur' ? 'selected' : '' }}>Étude d'éclairage intérieur</option>
-                  <option value="bilan_thermique_hp_flottante" {{ old('subject') == 'bilan_thermique_hp_flottante' ? 'selected' : '' }}>Bilan thermique HP flottante</option>
-                  <option value="etude_energetique_batiment_tertiaire" {{ old('subject') == 'etude_energetique_batiment_tertiaire' ? 'selected' : '' }}>Étude énergétique bâtiment tertiaire</option>
-                  <option value="visite_thermique_dimensionnement" {{ old('subject') == 'visite_thermique_dimensionnement' ? 'selected' : '' }}>Visite thermique sur dimensionnement</option>
-                </select>
-                @error('subject') <div class="invalid-feedback">{{ $message }}</div> @enderror
-              </div>
-
-              {{-- Message --}}
-              <div class="col-12">
-                <textarea name="message"
-                          class="form-control @error('message') is-invalid @enderror"
-                          rows="6"
-                          placeholder="Votre message"
-                          required>{{ old('message') }}</textarea>
-                @error('message') <div class="invalid-feedback">{{ $message }}</div> @enderror
-              </div>
-
-              {{-- Bouton d'envoi --}}
-              <div class="col-12 mt-2">
-                <button type="submit" class="cp-btn">
-                  <i class="fas fa-paper-plane me-2"></i> Envoyer le message
-                </button>
-              </div>
+    {{-- FORMULAIRE DEMANDE D'OFFRE --}}
+    <section class="offer-form-section {{ ($errors->offer->any() || session('offer_success')) ? 'show' : '' }}" id="offerFormSection">
+        <div class="offer-form-box">
+            <div class="offer-close-wrap">
+                <button type="button" class="offer-close" id="closeOfferForm">×</button>
             </div>
-          </form>
+
+            <h2 class="offer-form-title">Demande d’offre</h2>
+
+            <p class="offer-form-desc">
+                Vous souhaitez externaliser tout ou une partie de vos opérations ?<br>
+                Remplissez ce formulaire afin que notre équipe puisse étudier votre besoin
+                et vous proposer une solution adaptée.
+            </p>
+
+            @if(session('offer_success'))
+                <div class="offer-alert-success">
+                    {{ session('offer_success') }}
+                </div>
+            @endif
+
+            @if($errors->offer->any())
+                <div class="offer-alert-error">
+                    <ul>
+                        @foreach($errors->offer->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('contact.store') }}">
+                @csrf
+
+                <div class="offer-grid">
+                    <div>
+                        <input type="text" name="company_name" class="offer-input @error('company_name', 'offer') input-error @enderror" placeholder="Nom de l’entreprise" value="{{ old('company_name') }}" required>
+                        @error('company_name', 'offer') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="text" name="contact_name" class="offer-input @error('contact_name', 'offer') input-error @enderror" placeholder="Nom et prénom du contact" value="{{ old('contact_name') }}" required>
+                        @error('contact_name', 'offer') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="email" name="email" class="offer-input @error('email', 'offer') input-error @enderror" placeholder="Email professionnel" value="{{ old('email') }}" required>
+                        @error('email', 'offer') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="text" name="phone" class="offer-input @error('phone', 'offer') input-error @enderror" placeholder="Téléphone" value="{{ old('phone') }}">
+                        @error('phone', 'offer') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="text" name="activity_sector" class="offer-input @error('activity_sector', 'offer') input-error @enderror" placeholder="Secteur d’activité(cases à cocher)" value="{{ old('activity_sector') }}">
+                        @error('activity_sector', 'offer') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="text" name="service_type" class="offer-input @error('service_type', 'offer') input-error @enderror" placeholder="Type de service souhaité(cases à cocher)" value="{{ old('service_type') }}">
+                        @error('service_type', 'offer') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="offer-field-full">
+                        <input type="text" name="hear_about_us" class="offer-input @error('hear_about_us', 'offer') input-error @enderror" placeholder="How did you hear of us?" value="{{ old('hear_about_us') }}">
+                        @error('hear_about_us', 'offer') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="offer-field-full">
+                        <textarea name="message" class="offer-textarea @error('message', 'offer') input-error @enderror" placeholder="Description de votre projet / besoins spécifiques" required>{{ old('message') }}</textarea>
+                        @error('message', 'offer') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+                </div>
+
+                <p class="offer-note">
+                    Un conseiller Call Énergie Vert vous contactera rapidement.
+                </p>
+
+                <button type="submit" class="offer-submit">Envoyer la demande</button>
+            </form>
         </div>
+    </section>
 
-        {{-- INFO CONTACT Call energie vert --}}
-        <aside class="cp-aside">
-          <div class="cp-info">
-            <div class="cp-ico"><i class="fa fa-phone"></i></div>
-            <div>
-              <h5>Téléphone&nbsp;:</h5>
-              <a href="tel:+33123456789">+33745888791</a>
+    {{-- FORMULAIRE PARTENARIAT --}}
+    <section class="partner-form-section {{ ($errors->partner->any() || session('partner_success')) ? 'show' : '' }}" id="partnerFormSection">
+        <div class="partner-form-box">
+            <div class="partner-close-wrap">
+                <button type="button" class="partner-close" id="closePartnerForm">×</button>
             </div>
-          </div>
 
-          <div class="cp-info">
-            <div class="cp-ico"><i class="fas fa-map-marker-alt"></i></div>
-            <div>
-              <h5>Adresse&nbsp;:</h5>
-              <a href="https://www.google.com/maps/search/?api=1&query=38+Avenue+Villemain+75014+Paris"
-                 target="_blank" rel="noopener">
-                Call energie vert – Bureau d’Études Énergétiques<br>
-                38 Avenue Villemain – 75014 Paris
-              </a>
+            <h2 class="partner-form-title">Prestataires de services & demandes de partenariat</h2>
+
+            <p class="partner-form-desc">
+                Call Énergie Vert développe des partenariats durables avec des acteurs
+                partageant les mêmes exigences de qualité et de performance.<br>
+                Soumettez votre proposition et explorons ensemble les opportunités de collaboration.
+            </p>
+
+            @if(session('partner_success'))
+                <div class="partner-alert-success">
+                    {{ session('partner_success') }}
+                </div>
+            @endif
+
+            @if($errors->partner->any())
+                <div class="partner-alert-error">
+                    <ul>
+                        @foreach($errors->partner->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('partner.store') }}">
+                @csrf
+
+                <div class="partner-grid">
+                    <div>
+                        <input type="text" name="company_name" class="partner-input @error('company_name', 'partner') input-error @enderror" placeholder="Nom de l’entreprise" value="{{ old('company_name') }}" required>
+                        @error('company_name', 'partner') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="text" name="contact_name" class="partner-input @error('contact_name', 'partner') input-error @enderror" placeholder="Nom et prénom du contact" value="{{ old('contact_name') }}" required>
+                        @error('contact_name', 'partner') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="email" name="email" class="partner-input @error('email', 'partner') input-error @enderror" placeholder="Email professionnel" value="{{ old('email') }}" required>
+                        @error('email', 'partner') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="text" name="phone" class="partner-input @error('phone', 'partner') input-error @enderror" placeholder="Téléphone" value="{{ old('phone') }}">
+                        @error('phone', 'partner') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="text" name="business_domain" class="partner-input @error('business_domain', 'partner') input-error @enderror" placeholder="Domaine d’activité(cases à cocher)" value="{{ old('business_domain') }}">
+                        @error('business_domain', 'partner') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <input type="text" name="service_type" class="partner-input @error('service_type', 'partner') input-error @enderror" placeholder="Type de service souhaité(cases à cocher)" value="{{ old('service_type') }}">
+                        @error('service_type', 'partner') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="partner-field-full">
+                        <div class="partner-documents">
+                            <p>Documents (optionnel)</p>
+                            <ul>
+                                <li>Site web</li>
+                                <li>Brochure ou présentation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="partner-field-full">
+                        <textarea name="proposal_description" class="partner-textarea @error('proposal_description', 'partner') input-error @enderror" placeholder="Description de votre offre ou proposition" required>{{ old('proposal_description') }}</textarea>
+                        @error('proposal_description', 'partner') <div class="field-error">{{ $message }}</div> @enderror
+                    </div>
+                </div>
+
+                <p class="partner-note">
+                    Notre équipe étudiera votre proposition et vous contactera si une collaboration est envisageable.
+                </p>
+
+                <button type="submit" class="partner-submit">Envoyer la demande</button>
+            </form>
+        </div>
+    </section>
+
+    {{-- HERO --}}
+    <section class="contact-hero">
+        <div class="contact-hero-overlay">
+            <div class="contact-hero-content">
+                <h1>
+                    Chez Call Énergie Vert, nous analysons vos besoins afin de
+                    vous proposer <span class="highlight">une solution sur mesure</span>,
+                    adaptée à votre secteur d’activité, et à vos objectifs.
+                </h1>
             </div>
-          </div>
+        </div>
+    </section>
 
-          <div class="cp-info">
-            <div class="cp-ico"><i class="fa fa-envelope"></i></div>
-            <div>
-              <h5>E-mail&nbsp;:</h5>
-              <a href="mailto:contact@auditvision.fr">administration@auditvision.fr</a>
+    {{-- BUTTONS --}}
+    <section class="contact-actions">
+        <div class="container">
+            <div class="contact-actions-wrap">
+                <button type="button" class="contact-btn" id="openOfferForm">Demande d’offre</button>
+                <button type="button" class="contact-btn" id="openPartnerForm">Partenariat</button>
             </div>
-          </div>
-        </aside>
-      </div>
+        </div>
+    </section>
 
-      {{-- MAP Call energie vert --}}
-      <div class="cp-map">
-        <h5 class="mb-2 fw-bold">Call energie vert</h5>
-        <p class="text-muted mb-3">
-          38 Avenue Villemain, 75014 Paris, France<br>
-          SIREN : 982 511 644 – Assurance RC Pro : Markel Insurance SE
-        </p>
-
-        <iframe
-          src="https://www.google.com/maps?q=38%20Avenue%20Villemain%2075014%20Paris&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen>
-        </iframe>
-      </div>
-
-    </div>
-  </div>
-
+    <div class="contact-space"></div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const openOfferBtn = document.getElementById('openOfferForm');
+    const closeOfferBtn = document.getElementById('closeOfferForm');
+    const offerSection = document.getElementById('offerFormSection');
+
+    const openPartnerBtn = document.getElementById('openPartnerForm');
+    const closePartnerBtn = document.getElementById('closePartnerForm');
+    const partnerSection = document.getElementById('partnerFormSection');
+
+    if (openOfferBtn && offerSection) {
+        openOfferBtn.addEventListener('click', function () {
+            offerSection.classList.add('show');
+            if (partnerSection) partnerSection.classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    if (closeOfferBtn && offerSection) {
+        closeOfferBtn.addEventListener('click', function () {
+            offerSection.classList.remove('show');
+        });
+    }
+
+    if (openPartnerBtn && partnerSection) {
+        openPartnerBtn.addEventListener('click', function () {
+            partnerSection.classList.add('show');
+            if (offerSection) offerSection.classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    if (closePartnerBtn && partnerSection) {
+        closePartnerBtn.addEventListener('click', function () {
+            partnerSection.classList.remove('show');
+        });
+    }
+
+    @if($errors->offer->any() || session('offer_success'))
+        if (offerSection) {
+            offerSection.classList.add('show');
+            if (partnerSection) partnerSection.classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    @endif
+
+    @if($errors->partner->any() || session('partner_success'))
+        if (partnerSection) {
+            partnerSection.classList.add('show');
+            if (offerSection) offerSection.classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    @endif
+});
+</script>
 @endsection

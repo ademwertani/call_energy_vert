@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController as PublicContactController;
+use App\Http\Controllers\PartnershipController; // ✅ controller public partenariat
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\QuoteController;
@@ -25,8 +26,9 @@ use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\Admin\YoutubeVideoController;
-use App\Http\Controllers\Admin\CertificatController;  // Importer le contrôleur des certificats
+use App\Http\Controllers\Admin\CertificatController;
 use App\Http\Controllers\SecteurController;
+
 // ===================== PAGES PUBLIQUES =====================
 Route::get('/etude-eclairage', fn () => view('pages.etude-eclairage'))->name('lighting.study');
 Route::get('/bilan-carbone', fn () => view('pages.bilan-carbone'))->name('bilan-carbone');
@@ -35,7 +37,6 @@ Route::get('/etude-thermique', fn () => view('pages.etude-thermique'))->name('et
 Route::get('/dimensionnement-destratificateurs', fn () => view('pages.dimensionnement-destratificateurs'))->name('dimensionnement-destratificateurs');
 Route::get('/audit-tertiaire', fn () => view('pages.audit-tertiaire'))->name('audit-tertiaire');
 Route::get('/audit-habitat-collectif', fn () => view('pages.audit-habitat-collectif'))->name('audit-habitat-collectif');
-
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -66,6 +67,9 @@ Route::get('/services/{service}', [\App\Http\Controllers\ServiceController::clas
 // Contact public
 Route::get('/contact', [PublicContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [PublicContactController::class, 'store'])->name('contact.store');
+
+// ✅ Partenariat public
+Route::post('/partnership', [PartnershipController::class, 'store'])->name('partner.store');
 
 // ===================== AUTH =====================
 
@@ -103,10 +107,10 @@ Route::prefix('admin')
         Route::get('/about', [AdminAboutController::class, 'edit'])->name('about.edit');
         Route::put('/about', [AdminAboutController::class, 'update'])->name('about.update');
 
-        // ✅ CRUD Youtube videos (admin.videos.*)
+        // Youtube videos
         Route::resource('videos', YoutubeVideoController::class)->except(['show']);
 
-        // ✅ CRUD Certificats (admin.certificats.*)
+        // Certificats
         Route::resource('certificats', CertificatController::class);
     });
 
@@ -126,7 +130,5 @@ Route::prefix('advisor')
         Route::get('/dashboard', fn() => view('advisor.dashboard'))->name('advisor.dashboard');
     });
 
-// Tests middleware
 Route::get('/test-role', fn() => "Middleware works!")->middleware(['auth', 'role:admin'])->name('test-role');
 Route::get('/test-middleware', fn() => "Middleware works!")->middleware(['auth', 'role:admin'])->name('test-middleware');
-

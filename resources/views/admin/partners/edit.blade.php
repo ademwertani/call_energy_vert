@@ -1,56 +1,23 @@
-@extends('layouts.back')
+@extends('layouts.admin')
 
-@section('title', 'Modifier un partenaire')
+@section('title', 'Edit Partnership')
 
 @section('content')
-<div class="card shadow-sm">
-    <div class="card-header"><h4 class="mb-0">Modifier un partenaire</h4></div>
+<h2 class="mb-4">Edit Partnership</h2>
 
-    <div class="card-body">
-        <form action="{{ route('admin.partners.update', $partner) }}" method="POST" enctype="multipart/form-data">
-            @csrf @method('PUT')
+<form action="{{ route('admin.partners.update', $partner->id) }}" method="POST">
+    @csrf
+    @method('PUT')
 
-            <div class="mb-3">
-                <label class="form-label">Nom *</label>
-                <input type="text" name="name" value="{{ old('name', $partner->name) }}" class="form-control" required>
-                @error('name') <div class="text-danger small">{{ $message }}</div> @enderror
-            </div>
+    @include('admin.partners._form')
 
-            <div class="mb-2">
-                <label class="form-label">Logo actuel</label><br>
-                <img src="{{ asset('storage/' . ltrim($partner->logo, '/')) }}"
-                     alt="{{ $partner->name }}" style="max-height:80px;">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Nouveau logo (optionnel)</label>
-                <input type="file" name="logo" class="form-control" accept="image/*">
-                @error('logo') <div class="text-danger small">{{ $message }}</div> @enderror
-            </div>
-
-            <div class="mb-3">
-                <img id="preview" src="#" alt="" style="display:none; max-height:80px;">
-            </div>
-
-            <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-save me-2"></i>Mettre à jour
-                </button>
-                <a href="{{ route('admin.partners.index') }}" class="btn btn-outline-secondary">Annuler</a>
-            </div>
-        </form>
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-warning">
+            <i class="fas fa-edit me-2"></i>Update
+        </button>
+        <a href="{{ route('admin.partners.index') }}" class="btn btn-secondary">
+            Cancel
+        </a>
     </div>
-</div>
-
-@push('scripts')
-<script>
-document.querySelector('input[name="logo"]').addEventListener('change', e => {
-  const img = document.getElementById('preview');
-  const file = e.target.files?.[0];
-  if(!file){ img.style.display='none'; return; }
-  img.src = URL.createObjectURL(file);
-  img.style.display = 'inline-block';
-});
-</script>
-@endpush
+</form>
 @endsection
