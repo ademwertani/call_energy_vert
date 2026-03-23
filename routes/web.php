@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\Admin\PartnershipController as AdminPartnershipController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
@@ -86,7 +86,7 @@ Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'role:admin'])
     ->group(function () {
-
+Route::resource('partnerships', AdminPartnershipController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
         Route::resource('services', ServiceController::class);
         Route::resource('contacts', AdminContactController::class);
         Route::resource('projects', AdminProjectController::class);

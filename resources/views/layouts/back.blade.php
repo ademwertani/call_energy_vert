@@ -883,10 +883,10 @@
                     <span class="nav-text">Contact Messages</span>
                     <span class="badge">5</span>
                 </a>
-                <a class="nav-link @if(Route::is('admin.partners.*')) active @endif"
-    href="{{ route('admin.partners.index') }}" data-tooltip="Partnerships">
+                <a class="nav-link @if(Route::is('admin.partnerships.*')) active @endif"
+    href="{{ route('admin.partnerships.index') }}" data-tooltip="Partnerships">
     <i class="fas fa-handshake"></i>
-    <span class="nav-text">Partenariat</span>
+    <span class="nav-text">Demandes partenariat</span>
 </a>
                 <a class="nav-link @if(Route::is('admin.teams.*')) active @endif"
                     href="{{ route('admin.teams.index') }}" data-tooltip="Team Members">

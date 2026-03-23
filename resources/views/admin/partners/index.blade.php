@@ -1,71 +1,53 @@
-@extends('layouts.admin')
+@extends('layouts.back')
 
-@section('title', 'Partnerships')
+@section('title', 'Partners')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0">Partnerships</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Partners</h3>
     <a href="{{ route('admin.partners.create') }}" class="btn btn-success">
-        <i class="fas fa-plus me-2"></i>Add Partnership
+        <i class="fa fa-plus me-2"></i>Ajouter un partenaire
     </a>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-bordered table-hover align-middle" id="table">
-        <thead class="table-light">
-            <tr>
-                <th>#</th>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Business Domain</th>
-                <th>Service Type</th>
-                <th>Date</th>
-                <th style="width:220px;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($partners as $partner)
+<div class="card shadow-sm">
+    <div class="card-body table-responsive">
+        <table class="table table-hover align-middle" id="table">
+            <thead>
                 <tr>
-                    <td>{{ $partner->id }}</td>
-                    <td>{{ $partner->company_name }}</td>
-                    <td>{{ $partner->contact_name }}</td>
-                    <td>{{ $partner->email }}</td>
-                    <td>{{ $partner->phone ?? '-' }}</td>
-                    <td>{{ $partner->business_domain ?? '-' }}</td>
-                    <td>{{ $partner->service_type ?? '-' }}</td>
-                    <td>{{ $partner->created_at->format('d/m/Y') }}</td>
-                    <td>
-                        <div class="d-flex gap-2">
-                            <a href="{{ route('admin.partners.show', $partner->id) }}" class="btn btn-info btn-sm">
-                                <i class="fas fa-eye"></i>
+                    <th>#</th>
+                    <th>Logo</th>
+                    <th>Nom</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($partners as $partner)
+                    <tr>
+                        <td>{{ $partner->id }}</td>
+                        <td>
+                            <img src="{{ asset('storage/' . ltrim($partner->logo, '/')) }}"
+                                 alt="{{ $partner->name }}" style="height:48px; width:auto; object-fit:contain;">
+                        </td>
+                        <td>{{ $partner->name }}</td>
+                        <td class="text-end">
+                            <a href="{{ route('admin.partners.edit', $partner) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-pen"></i>
                             </a>
-
-                            <a href="{{ route('admin.partners.edit', $partner->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-edit"></i>
-                            </a>
-
-                            <form action="{{ route('admin.partners.destroy', $partner->id) }}" method="POST" onsubmit="return confirm('Supprimer ce partenariat ?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
+                            <form action="{{ route('admin.partners.destroy', $partner) }}" method="POST" class="d-inline"
+                                  onsubmit="return confirm('Supprimer ce partenaire ?');">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash"></i>
                                 </button>
                             </form>
-                        </div>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="9" class="text-center">No partnerships found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
-
-<div class="mt-3">
-    {{ $partners->links() }}
+                        </td>
+                    </tr>
+                @empty
+                    <tr><td colspan="4" class="text-center text-muted py-4">Aucun partenaire pour le moment.</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection
