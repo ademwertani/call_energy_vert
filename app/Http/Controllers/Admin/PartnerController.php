@@ -1,83 +1,53 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Partnership;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
-    public function index()
-    {
-        $partners = Partnership::latest()->paginate(10);
+    public function index() {
+        $partners = Partner::latest()->get();
         return view('admin.partners.index', compact('partners'));
     }
 
-    public function create()
-    {
+    public function create() {
         return view('admin.partners.create');
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'company_name' => 'required|string|max:255',
-            'contact_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:50',
-            'business_domain' => 'nullable|string|max:255',
-            'service_type' => 'nullable|string|max:255',
-            'proposal_description' => 'required|string',
+    public function store(Request $request) {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'logo' => 'required|image|max:2048',
         ]);
 
-        Partnership::create($validated);
+        $data['logo'] = $request->file('logo')->store('partners', 'public');
 
-        return redirect()
-            ->route('admin.partners.index')
-            ->with('success', 'Partnership created successfully.');
+        Partner::create($data);
+        return redirect()->route('admin.partners.index')->with('success', 'Partenaire ajouté.');
     }
 
-    public function show(string $id)
-    {
-        $partner = Partnership::findOrFail($id);
-        return view('admin.partners.show', compact('partner'));
-    }
-
-    public function edit(string $id)
-    {
-        $partner = Partnership::findOrFail($id);
+    public function edit(Partner $partner) {
         return view('admin.partners.edit', compact('partner'));
     }
 
-    public function update(Request $request, string $id)
-    {
-        $partner = Partnership::findOrFail($id);
-
-        $validated = $request->validate([
-            'company_name' => 'required|string|max:255',
-            'contact_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:50',
-            'business_domain' => 'nullable|string|max:255',
-            'service_type' => 'nullable|string|max:255',
-            'proposal_description' => 'required|string',
+    public function update(Request $request, Partner $partner) {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'logo' => 'nullable|image|max:2048',
         ]);
 
-        $partner->update($validated);
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('partners', 'public');
+        }
 
-        return redirect()
-            ->route('admin.partners.index')
-            ->with('success', 'Partnership updated successfully.');
+        $partner->update($data);
+        return redirect()->route('admin.partners.index')->with('success', 'Partenaire mis à jour.');
     }
 
-    public function destroy(string $id)
-    {
-        $partner = Partnership::findOrFail($id);
+    public function destroy(Partner $partner) {
         $partner->delete();
-
-        return redirect()
-            ->route('admin.partners.index')
-            ->with('success', 'Partnership deleted successfully.');
+        return back()->with('success', 'Partenaire supprimé.');
     }
 }

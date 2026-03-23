@@ -37,7 +37,9 @@ Route::get('/etude-thermique', fn () => view('pages.etude-thermique'))->name('et
 Route::get('/dimensionnement-destratificateurs', fn () => view('pages.dimensionnement-destratificateurs'))->name('dimensionnement-destratificateurs');
 Route::get('/audit-tertiaire', fn () => view('pages.audit-tertiaire'))->name('audit-tertiaire');
 Route::get('/audit-habitat-collectif', fn () => view('pages.audit-habitat-collectif'))->name('audit-habitat-collectif');
-
+Route::get('/carriere', function () {
+    return view('pages.carriere');
+})->name('carriere');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/chatbot', [ChatbotController::class, 'show'])->name('chatbot.show');
