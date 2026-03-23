@@ -2,34 +2,41 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Admin\PartnershipController as AdminPartnershipController;
+
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController as PublicContactController;
+use App\Http\Controllers\PartnershipController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\SecteurController;
+use App\Http\Controllers\CareerController;
+
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
-use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ContactController as PublicContactController;
-use App\Http\Controllers\PartnershipController; // ✅ controller public partenariat
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Admin\PartnershipController as AdminPartnershipController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
-use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\Admin\QuoteController as AdminQuoteController;
 use App\Http\Controllers\Admin\StatController as AdminStatController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
-use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\Admin\YoutubeVideoController;
 use App\Http\Controllers\Admin\CertificatController;
-use App\Http\Controllers\SecteurController;
+use App\Http\Controllers\Admin\CareerController as AdminCareerController;
 
 // ===================== PAGES PUBLIQUES =====================
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/etude-eclairage', fn () => view('pages.etude-eclairage'))->name('lighting.study');
 Route::get('/bilan-carbone', fn () => view('pages.bilan-carbone'))->name('bilan-carbone');
 Route::get('/plan-reduction', fn () => view('pages.plan-reduction'))->name('plan-reduction');
@@ -37,10 +44,9 @@ Route::get('/etude-thermique', fn () => view('pages.etude-thermique'))->name('et
 Route::get('/dimensionnement-destratificateurs', fn () => view('pages.dimensionnement-destratificateurs'))->name('dimensionnement-destratificateurs');
 Route::get('/audit-tertiaire', fn () => view('pages.audit-tertiaire'))->name('audit-tertiaire');
 Route::get('/audit-habitat-collectif', fn () => view('pages.audit-habitat-collectif'))->name('audit-habitat-collectif');
-Route::get('/carriere', function () {
-    return view('pages.carriere');
-})->name('carriere');
-Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/carriere', [CareerController::class, 'index'])->name('carriere');
+Route::post('/carriere/postuler/{id}', [CareerController::class, 'apply'])->name('carriere.apply');
 
 Route::get('/chatbot', [ChatbotController::class, 'show'])->name('chatbot.show');
 Route::post('/chatbot/send', [ChatbotController::class, 'send'])->name('chatbot.send');
@@ -55,9 +61,9 @@ Route::get('/secteurs', [SecteurController::class, 'index'])->name('projects.sec
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
-Route::get('/team', fn() => view('pages.team'))->name('team');
-Route::get('/testimonials', fn() => view('pages.testimonial'))->name('testimonials');
-Route::get('/404', fn() => view('pages.404'))->name('404');
+Route::get('/team', fn () => view('pages.team'))->name('team');
+Route::get('/testimonials', fn () => view('pages.testimonial'))->name('testimonials');
+Route::get('/404', fn () => view('pages.404'))->name('404');
 
 Route::get('/quote', [QuoteController::class, 'create'])->name('pages.quote');
 Route::post('/quote', [QuoteController::class, 'store'])->name('pages.quote');
@@ -70,7 +76,7 @@ Route::get('/services/{service}', [\App\Http\Controllers\ServiceController::clas
 Route::get('/contact', [PublicContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [PublicContactController::class, 'store'])->name('contact.store');
 
-// ✅ Partenariat public
+// Partenariat public
 Route::post('/partnership', [PartnershipController::class, 'store'])->name('partner.store');
 
 // ===================== AUTH =====================
@@ -88,7 +94,8 @@ Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'role:admin'])
     ->group(function () {
-Route::resource('partnerships', AdminPartnershipController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
+
+        Route::resource('partnerships', AdminPartnershipController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
         Route::resource('services', ServiceController::class);
         Route::resource('contacts', AdminContactController::class);
         Route::resource('projects', AdminProjectController::class);
@@ -100,6 +107,7 @@ Route::resource('partnerships', AdminPartnershipController::class)->only(['index
         Route::resource('teams', TeamController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('banners', BannerController::class);
+        Route::resource('careers', AdminCareerController::class);
 
         // Social
         Route::get('/social', [SocialController::class, 'edit'])->name('social.edit');
@@ -121,7 +129,7 @@ Route::resource('partnerships', AdminPartnershipController::class)->only(['index
 Route::prefix('referencer')
     ->middleware(['auth', 'role:referencer'])
     ->group(function () {
-        Route::get('/dashboard', fn() => view('referencer.dashboard'))->name('referencer.dashboard');
+        Route::get('/dashboard', fn () => view('referencer.dashboard'))->name('referencer.dashboard');
     });
 
 // ===================== ADVISOR =====================
@@ -129,8 +137,10 @@ Route::prefix('referencer')
 Route::prefix('advisor')
     ->middleware(['auth', 'role:advisor'])
     ->group(function () {
-        Route::get('/dashboard', fn() => view('advisor.dashboard'))->name('advisor.dashboard');
+        Route::get('/dashboard', fn () => view('advisor.dashboard'))->name('advisor.dashboard');
     });
 
-Route::get('/test-role', fn() => "Middleware works!")->middleware(['auth', 'role:admin'])->name('test-role');
-Route::get('/test-middleware', fn() => "Middleware works!")->middleware(['auth', 'role:admin'])->name('test-middleware');
+// ===================== TESTS =====================
+
+Route::get('/test-role', fn () => "Middleware works!")->middleware(['auth', 'role:admin'])->name('test-role');
+Route::get('/test-middleware', fn () => "Middleware works!")->middleware(['auth', 'role:admin'])->name('test-middleware');

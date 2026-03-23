@@ -868,7 +868,10 @@
   <i class="fa-solid fa-certificate"></i>
   <span class="nav-text">Certificats</span>
 </a>
-
+<form action="{{ route('admin.careers.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @include('admin.careers._form')
+</form>
                 </a>
             </div>
             <!-- Communication Group -->
