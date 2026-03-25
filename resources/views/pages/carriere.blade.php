@@ -93,6 +93,7 @@
     display:grid;
     grid-template-columns:repeat(2, 1fr);
     gap:30px;
+    align-items:stretch;
 }
 
 .career-card{
@@ -100,47 +101,90 @@
     border-radius:24px;
     overflow:hidden;
     box-shadow:0 8px 25px rgba(0,0,0,.12);
+    display:flex;
+    flex-direction:column;
+    height:100%;
 }
 
 .career-image{
     width:100%;
-    height:420px;
+    height:360px;
     object-fit:cover;
     display:block;
+    flex-shrink:0;
 }
 
 .career-card-title{
     background:#61c646;
     color:#fff;
     text-align:center;
-    font-size:1.45rem;
+    font-size:1.35rem;
     font-weight:800;
     padding:18px 20px;
+    min-height:90px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    line-height:1.35;
+    flex-shrink:0;
 }
 
 .career-card-body{
     padding:28px 30px 35px;
     color:#fff;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    min-height:520px;
+}
+
+.career-short-desc{
+    min-height:90px;
+    max-height:90px;
+    overflow:hidden;
+    line-height:1.7;
+    margin-bottom:20px;
 }
 
 .career-card-body h4{
     color:#61c646;
     margin-bottom:14px;
     font-weight:800;
+    flex-shrink:0;
 }
 
-.career-card-body p{
-    line-height:1.7;
+.career-missions{
+    min-height:210px;
+    max-height:210px;
+    overflow:auto;
+    margin-bottom:20px;
+    padding-right:8px;
 }
 
-.career-card-body ul{
+.career-missions ul{
     padding-left:20px;
-    margin-bottom:24px;
+    margin-bottom:0;
 }
 
-.career-card-body li{
+.career-missions li{
     margin-bottom:8px;
     line-height:1.5;
+}
+
+.career-missions::-webkit-scrollbar{
+    width:6px;
+}
+
+.career-missions::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.25);
+    border-radius:10px;
+}
+
+.apply-btn-wrap{
+    margin-top:auto;
+    padding-top:18px;
+    text-align:left;
+    flex-shrink:0;
 }
 
 .apply-btn{
@@ -153,54 +197,12 @@
     font-weight:700;
     cursor:pointer;
     transition:.2s;
+    text-decoration:none;
 }
 
 .apply-btn:hover{
     background:#4baa33;
-}
-
-.apply-form-wrap{
-    margin-top:25px;
-    background:#111;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:18px;
-    padding:20px;
-}
-
-.apply-form-wrap input,
-.apply-form-wrap textarea{
-    width:100%;
-    margin-bottom:14px;
-    border:none;
-    border-radius:12px;
-    padding:14px 16px;
-    background:#f3f3f3;
-    color:#222;
-    outline:none;
-}
-
-.apply-form-wrap input[type="file"]{
-    padding:12px;
-}
-
-.apply-form-wrap button{
-    background:#61c646;
     color:#fff;
-    border:none;
-    border-radius:999px;
-    padding:12px 28px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.alert-success-career{
-    max-width:1250px;
-    margin:25px auto 0;
-    background:#d1fae5;
-    color:#065f46;
-    border:1px solid #a7f3d0;
-    padding:15px 18px;
-    border-radius:12px;
 }
 
 .empty-careers{
@@ -221,7 +223,23 @@
     }
 
     .career-card-title{
+        min-height:80px;
         font-size:1.15rem;
+    }
+
+    .career-card-body{
+        min-height:auto;
+    }
+
+    .career-short-desc{
+        min-height:auto;
+        max-height:none;
+    }
+
+    .career-missions{
+        min-height:auto;
+        max-height:none;
+        overflow:visible;
     }
 }
 
@@ -251,12 +269,15 @@
     .career-subtitle{
         font-size:1rem;
     }
+
+    .career-image{
+        height:280px;
+    }
 }
 </style>
 
 <section class="contact-page">
 
-    {{-- HEADER / HERO --}}
     <section class="contact-hero">
         <div class="contact-hero-overlay">
             <div class="contact-hero-content">
@@ -273,13 +294,6 @@
         </div>
     </section>
 
-    @if(session('career_success'))
-        <div class="alert-success-career">
-            {{ session('career_success') }}
-        </div>
-    @endif
-
-    {{-- CONTENU --}}
     <section class="career-section">
         <h2 class="career-title">Nos opportunités</h2>
         <p class="career-subtitle">Nous recrutons principalement pour les postes suivants</p>
@@ -299,32 +313,31 @@
 
                     <div class="career-card-body">
                         @if($career->short_description)
-                            <p>{{ $career->short_description }}</p>
+                            <div class="career-short-desc">
+                                {{ $career->short_description }}
+                            </div>
+                        @else
+                            <div class="career-short-desc"></div>
                         @endif
+
+                        <h4>Missions :</h4>
 
                         @if(count($career->missions_list))
-                            <h4>Missions :</h4>
-                            <ul>
-                                @foreach($career->missions_list as $mission)
-                                    <li>{{ $mission }}</li>
-                                @endforeach
-                            </ul>
+                            <div class="career-missions">
+                                <ul>
+                                    @foreach($career->missions_list as $mission)
+                                        <li>{{ $mission }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @else
+                            <div class="career-missions"></div>
                         @endif
 
-                        <button type="button" class="apply-btn" onclick="toggleApplyForm({{ $career->id }})">
-                            Postuler
-                        </button>
-
-                        <div class="apply-form-wrap" id="applyForm{{ $career->id }}" style="display:none;">
-                            <form action="{{ route('carriere.apply', $career->id) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <input type="text" name="full_name" placeholder="Nom et prénom" required>
-                                <input type="email" name="email" placeholder="Email" required>
-                                <input type="text" name="phone" placeholder="Téléphone">
-                                <input type="file" name="cv" accept=".pdf,.doc,.docx">
-                                <textarea name="message" rows="4" placeholder="Message"></textarea>
-                                <button type="submit">Envoyer ma candidature</button>
-                            </form>
+                        <div class="apply-btn-wrap">
+                            <a href="{{ route('carriere.show', $career->id) }}" class="apply-btn">
+                                Postuler
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -337,13 +350,4 @@
     </section>
 
 </section>
-
-<script>
-function toggleApplyForm(id) {
-    const form = document.getElementById('applyForm' + id);
-    if (form) {
-        form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    }
-}
-</script>
 @endsection

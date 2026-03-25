@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Career extends Model
@@ -21,10 +22,13 @@ class Career extends Model
         'sort_order',
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
+    protected $casts = [
+        'is_active' => 'boolean',
+        'sort_order' => 'integer',
+    ];
 
+    protected static function booted(): void
+    {
         static::creating(function ($career) {
             if (empty($career->slug)) {
                 $career->slug = Str::slug($career->title . '-' . uniqid());
@@ -32,26 +36,26 @@ class Career extends Model
         });
     }
 
-    public function applications()
+    public function applications(): HasMany
     {
         return $this->hasMany(CareerApplication::class);
     }
 
-    public function getMissionsListAttribute()
+    public function getMissionsListAttribute(): array
     {
-        if (!$this->missions) {
+        if (empty($this->missions)) {
             return [];
         }
 
-        return array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $this->missions)));
+        return array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $this->missions))));
     }
 
-    public function getRequirementsListAttribute()
+    public function getRequirementsListAttribute(): array
     {
-        if (!$this->requirements) {
+        if (empty($this->requirements)) {
             return [];
         }
 
-        return array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $this->requirements)));
+        return array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $this->requirements))));
     }
 }

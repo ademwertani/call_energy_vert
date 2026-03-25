@@ -15,6 +15,7 @@ use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\SecteurController;
 use App\Http\Controllers\CareerController;
 
+use App\Http\Controllers\Admin\CareerApplicationController as AdminCareerApplicationController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\TeamController;
@@ -45,8 +46,10 @@ Route::get('/dimensionnement-destratificateurs', fn () => view('pages.dimensionn
 Route::get('/audit-tertiaire', fn () => view('pages.audit-tertiaire'))->name('audit-tertiaire');
 Route::get('/audit-habitat-collectif', fn () => view('pages.audit-habitat-collectif'))->name('audit-habitat-collectif');
 
+// Carrière
 Route::get('/carriere', [CareerController::class, 'index'])->name('carriere');
-Route::post('/carriere/postuler/{id}', [CareerController::class, 'apply'])->name('carriere.apply');
+Route::get('/carriere/{career}', [CareerController::class, 'show'])->name('carriere.show');
+Route::post('/carriere/{career}/postuler', [CareerController::class, 'apply'])->name('carriere.apply');
 
 Route::get('/chatbot', [ChatbotController::class, 'show'])->name('chatbot.show');
 Route::post('/chatbot/send', [ChatbotController::class, 'send'])->name('chatbot.send');
@@ -108,6 +111,16 @@ Route::prefix('admin')
         Route::resource('categories', CategoryController::class);
         Route::resource('banners', BannerController::class);
         Route::resource('careers', AdminCareerController::class);
+
+        // Candidatures carrière
+        Route::get('careers/{career}/applications', [AdminCareerApplicationController::class, 'byCareer'])
+            ->name('careers.applications');
+        Route::get('applications', [AdminCareerApplicationController::class, 'index'])
+            ->name('applications.index');
+        Route::get('applications/{application}', [AdminCareerApplicationController::class, 'show'])
+            ->name('applications.show');
+        Route::delete('applications/{application}', [AdminCareerApplicationController::class, 'destroy'])
+            ->name('applications.destroy');
 
         // Social
         Route::get('/social', [SocialController::class, 'edit'])->name('social.edit');

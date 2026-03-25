@@ -41,7 +41,6 @@
             flex-direction: column;
         }
 
-        /* Header Styles */
         .admin-header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
@@ -75,7 +74,6 @@
             font-size: 1.8rem;
         }
 
-        /* Enhanced Sidebar Styles */
         .admin-sidebar {
             position: fixed;
             top: var(--header-height);
@@ -94,7 +92,6 @@
             box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
         }
 
-        /* Sidebar collapsed state */
         .sidebar-collapsed .admin-sidebar {
             width: var(--sidebar-collapsed-width);
         }
@@ -124,7 +121,6 @@
             transform: translateX(0);
         }
 
-        /* Fixed Sidebar Toggle Button */
         .sidebar-toggle-btn {
             position: absolute;
             top: 1rem;
@@ -159,14 +155,12 @@
             transform: rotate(180deg);
         }
 
-        /* Hide toggle button on mobile */
         @media (max-width: 991.98px) {
             .sidebar-toggle-btn {
                 display: none !important;
             }
         }
 
-        /* Sidebar Navigation Groups */
         .sidebar-nav {
             padding: 3rem 0 2rem 0;
             position: relative;
@@ -200,7 +194,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Collapsed sidebar styles */
         .sidebar-collapsed .nav-group-title {
             padding: 0.5rem 0.75rem 0.75rem 0.75rem;
             justify-content: center;
@@ -225,7 +218,6 @@
             font-weight: 500;
             font-size: 0.95rem;
             transition: all 0.3s ease;
-            border-radius: 0;
             margin: 0.125rem 1rem;
             border-radius: 12px;
             position: relative;
@@ -305,7 +297,6 @@
             overflow: hidden;
         }
 
-        /* Tooltip for collapsed sidebar */
         .sidebar-collapsed .nav-link {
             position: relative;
         }
@@ -334,7 +325,6 @@
             visibility: visible;
         }
 
-        /* Main Content Layout */
         .main-wrapper {
             display: flex;
             flex-direction: column;
@@ -373,7 +363,6 @@
             border-radius: 24px 24px 0 0;
         }
 
-        /* Enhanced User Dropdown */
         .user-dropdown .dropdown-toggle {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             border: none;
@@ -429,7 +418,6 @@
             background: linear-gradient(135deg, var(--danger-color), #f87171);
         }
 
-        /* Mobile Sidebar Toggle */
         .sidebar-toggle {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             border: none;
@@ -445,7 +433,6 @@
             box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
         }
 
-        /* Enhanced Alert Styles */
         .alert {
             border: none;
             border-radius: 16px;
@@ -468,7 +455,6 @@
             margin-right: 0.75rem;
         }
 
-        /* Enhanced Footer - Fixed z-index */
         .admin-footer {
             background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(20px);
@@ -481,93 +467,6 @@
             z-index: 900;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-section h6 {
-            color: var(--primary-light);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--primary-light);
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-links a {
-            display: flex;
-            align-items: center;
-        }
-
-        .footer-links i {
-            width: 16px;
-            margin-right: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-bottom p {
-            margin: 0;
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: #cbd5e1;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Search and Filter Styles */
         .search-filter-container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -578,19 +477,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .search-input {
-            border: 2px solid rgba(16, 185, 129, 0.2);
-            border-radius: 10px;
-            padding: 0.75rem 1rem;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(5, 150, 105, 0.25);
-        }
-
+        .search-input,
         .filter-select {
             border: 2px solid rgba(16, 185, 129, 0.2);
             border-radius: 10px;
@@ -599,6 +486,7 @@
             transition: all 0.3s ease;
         }
 
+        .search-input:focus,
         .filter-select:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.2rem rgba(5, 150, 105, 0.25);
@@ -631,12 +519,10 @@
             opacity: 0.5;
         }
 
-        /* Table enhancements */
         .table-hover tbody tr:hover {
             background-color: rgba(16, 185, 129, 0.05);
         }
 
-        /* Responsive Design */
         @media (min-width: 992px) {
             .admin-sidebar {
                 transform: translateX(0);
@@ -660,16 +546,6 @@
             .content-wrapper {
                 padding: 1.5rem;
                 border-radius: 16px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
             }
 
             .search-filter-container {
@@ -696,7 +572,6 @@
             }
         }
 
-        /* Overlay for mobile */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -716,13 +591,11 @@
             visibility: visible;
         }
 
-        /* Animation for page load */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -733,7 +606,6 @@
             animation: fadeInUp 0.6s ease-out;
         }
 
-        /* Status indicators */
         .status-indicator {
             width: 8px;
             height: 8px;
@@ -755,26 +627,28 @@
 </head>
 
 <body>
-    <!-- Header -->
     <nav class="navbar navbar-expand-lg admin-header">
         <div class="container-fluid">
             <button class="sidebar-toggle me-3 d-lg-none" type="button" onclick="toggleSidebar()">
                 <i class="fas fa-bars"></i>
             </button>
+
             <a class="navbar-brand" href="{{ route('admin.services.index') }}">
                 <i class="fas fa-leaf me-2"></i>Call energie vert Admin
             </a>
+
             <div class="ms-auto d-flex align-items-center">
                 <div class="me-3 d-none d-md-block">
                     <span class="status-indicator status-online"></span>
                     <small class="text-muted">System Online</small>
                 </div>
+
                 <div class="dropdown user-dropdown">
-                    <button class="btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle me-2"></i>
                         <span class="d-none d-sm-inline">Admin User</span>
                     </button>
+
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                         <li>
                             <a class="dropdown-item" href="#">
@@ -791,14 +665,11 @@
                                 <i class="fas fa-bell"></i> Notifications
                             </a>
                         </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <form action="{{ route('admin.logout') }}" method="POST"
-                                onsubmit="return confirm('Êtes-vous sûr de vouloir vous déconnecter ?');">
+                        <li><hr class="dropdown-divider"></li>
+                        <li class="px-2">
+                            <form action="{{ route('admin.logout') }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir vous déconnecter ?');">
                                 @csrf
-                                <button type="submit" class="btn btn-danger">
+                                <button type="submit" class="btn btn-danger w-100">
                                     Déconnexion
                                 </button>
                             </form>
@@ -808,138 +679,161 @@
             </div>
         </div>
     </nav>
-    <!-- Sidebar Overlay -->
+
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
-    <!-- Enhanced Sidebar with Fixed Toggle Button -->
+
     <nav class="admin-sidebar">
-        <!-- Desktop Toggle Button - Fixed positioning -->
         <button class="sidebar-toggle-btn d-none d-lg-block" onclick="toggleDesktopSidebar()" title="Toggle Sidebar">
             <i class="fas fa-chevron-left"></i>
         </button>
+
         <div class="sidebar-nav">
-            <!-- Content Management Group -->
             <div class="nav-group">
                 <div class="nav-group-title">
                     <i class="fas fa-edit"></i>
                     <span class="title-text">Content Management</span>
                 </div>
+
                 <a class="nav-link @if(Route::is('admin.banners.*')) active @endif"
-                    href="{{ route('admin.banners.index') }}" data-tooltip="Banners">
+                   href="{{ route('admin.banners.index') }}" data-tooltip="Banners">
                     <i class="fas fa-image"></i>
                     <span class="nav-text">Banners</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.categories.*')) active @endif"
-                    href="{{ route('admin.categories.index') }}" data-tooltip="Categories">
+                   href="{{ route('admin.categories.index') }}" data-tooltip="Categories">
                     <i class="fas fa-tags"></i>
                     <span class="nav-text">Categories</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.services.*')) active @endif"
-                    href="{{ route('admin.services.index') }}" data-tooltip="Services">
+                   href="{{ route('admin.services.index') }}" data-tooltip="Services">
                     <i class="fas fa-cogs"></i>
                     <span class="nav-text">Services</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.projects.*')) active @endif"
-                    href="{{ route('admin.projects.index') }}" data-tooltip="Projects">
+                   href="{{ route('admin.projects.index') }}" data-tooltip="Projects">
                     <i class="fas fa-briefcase"></i>
                     <span class="nav-text">Projects</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.blogs.*')) active @endif"
-                    href="{{ route('admin.blogs.index') }}" data-tooltip="Blog Posts">
+                   href="{{ route('admin.blogs.index') }}" data-tooltip="Blog Posts">
                     <i class="fas fa-blog"></i>
                     <span class="nav-text">Blog Posts</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.quotes.*')) active @endif"
-                    href="{{ route('admin.quotes.index') }}" data-tooltip="quotes">
-                    <i class="fas fa-file-invoice float-lg-start"></i>
+                   href="{{ route('admin.quotes.index') }}" data-tooltip="quotes">
+                    <i class="fas fa-file-invoice"></i>
                     <span class="nav-text">Quote</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.partners.*')) active @endif"
-                    href="{{ route('admin.partners.index') }}" data-tooltip="Partners">
+                   href="{{ route('admin.partners.index') }}" data-tooltip="Partners">
                     <i class="fas fa-handshake"></i>
                     <span class="nav-text">Partners</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.customers.*')) active @endif"
-   href="{{ route('admin.customers.index') }}" data-tooltip="Clients">
-  <i class="fa-solid fa-users"></i>
-  <span class="nav-text">Customers</span>
-</a>
-<a class="nav-link @if(Route::is('admin.certificats.*')) active @endif"
-   href="{{ route('admin.certificats.index') }}" data-tooltip="Certificats">
-  <i class="fa-solid fa-certificate"></i>
-  <span class="nav-text">Certificats</span>
-</a>
-<form action="{{ route('admin.careers.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @include('admin.careers._form')
-</form>
+                   href="{{ route('admin.customers.index') }}" data-tooltip="Clients">
+                    <i class="fa-solid fa-users"></i>
+                    <span class="nav-text">Customers</span>
+                </a>
+
+                <a class="nav-link @if(Route::is('admin.certificats.*')) active @endif"
+                   href="{{ route('admin.certificats.index') }}" data-tooltip="Certificats">
+                    <i class="fa-solid fa-certificate"></i>
+                    <span class="nav-text">Certificats</span>
+                </a>
+
+                <a class="nav-link @if(Route::is('admin.careers.*')) active @endif"
+                   href="{{ route('admin.careers.index') }}" data-tooltip="Carrières">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="nav-text">Carrières</span>
+                </a>
+
+                <a class="nav-link @if(Route::is('admin.applications.*') || Route::is('admin.careers.applications')) active @endif"
+                   href="{{ route('admin.applications.index') }}" data-tooltip="Candidatures">
+                    <i class="fas fa-file-signature"></i>
+                    <span class="nav-text">Candidatures</span>
                 </a>
             </div>
-            <!-- Communication Group -->
+
             <div class="nav-group">
                 <div class="nav-group-title">
                     <i class="fas fa-comments"></i>
                     <span class="title-text">Communication</span>
                 </div>
+
                 <a class="nav-link @if(Route::is('admin.contacts.*')) active @endif"
-                    href="{{ route('admin.contacts.index') }}" data-tooltip="Contact Messages">
+                   href="{{ route('admin.contacts.index') }}" data-tooltip="Contact Messages">
                     <i class="fas fa-envelope"></i>
                     <span class="nav-text">Contact Messages</span>
                     <span class="badge">5</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.partnerships.*')) active @endif"
-    href="{{ route('admin.partnerships.index') }}" data-tooltip="Partnerships">
-    <i class="fas fa-handshake"></i>
-    <span class="nav-text">Demandes partenariat</span>
-</a>
+                   href="{{ route('admin.partnerships.index') }}" data-tooltip="Partnerships">
+                    <i class="fas fa-handshake"></i>
+                    <span class="nav-text">Demandes partenariat</span>
+                </a>
+
                 <a class="nav-link @if(Route::is('admin.teams.*')) active @endif"
-                    href="{{ route('admin.teams.index') }}" data-tooltip="Team Members">
+                   href="{{ route('admin.teams.index') }}" data-tooltip="Team Members">
                     <i class="fas fa-users"></i>
                     <span class="nav-text">Team Members</span>
                 </a>
             </div>
-            <!-- Site Configuration Group -->
+
             <div class="nav-group">
                 <div class="nav-group-title">
                     <i class="fas fa-sliders-h"></i>
                     <span class="title-text">Site Configuration</span>
                 </div>
-                <a class="nav-link @if(Route::is('admin.about.*')) active @endif" href="{{ route('admin.about.edit') }}"
-                    data-tooltip="About Page">
+
+                <a class="nav-link @if(Route::is('admin.about.*')) active @endif"
+                   href="{{ route('admin.about.edit') }}" data-tooltip="About Page">
                     <i class="fas fa-info-circle"></i>
                     <span class="nav-text">About Page</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.social.*')) active @endif"
-                    href="{{ route('admin.social.edit') }}" data-tooltip="Social Links">
+                   href="{{ route('admin.social.edit') }}" data-tooltip="Social Links">
                     <i class="fab fa-facebook"></i>
                     <span class="nav-text">Social Links</span>
                 </a>
+
                 <a class="nav-link @if(Route::is('admin.videos.*')) active @endif"
-    href="{{ route('admin.videos.index') }}"
-    data-tooltip="YouTube Video">
-    <i class="fab fa-youtube"></i>
-    <span class="nav-text">YouTube Video</span>
-</a>
+                   href="{{ route('admin.videos.index') }}" data-tooltip="YouTube Video">
+                    <i class="fab fa-youtube"></i>
+                    <span class="nav-text">YouTube Video</span>
+                </a>
 
                 <a class="nav-link @if(Route::is('admin.stats.*')) active @endif"
-                    href="{{ route('admin.stats.index') }}" data-tooltip="Stats">
-                    <i class="fas fa-chart-line float-lg-start"></i>
+                   href="{{ route('admin.stats.index') }}" data-tooltip="Stats">
+                    <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Statistiques</span>
                 </a>
             </div>
-            <!-- System Management Group -->
+
             <div class="nav-group">
                 <div class="nav-group-title">
                     <i class="fas fa-server"></i>
                     <span class="title-text">System Management</span>
                 </div>
+
                 <a class="nav-link" href="#" data-tooltip="User Management">
                     <i class="fas fa-users-cog"></i>
                     <span class="nav-text">User Management</span>
                 </a>
+
                 <a class="nav-link" href="#" data-tooltip="Analytics">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Analytics</span>
                 </a>
+
                 <a class="nav-link" href="#" data-tooltip="System Settings">
                     <i class="fas fa-cog"></i>
                     <span class="nav-text">System Settings</span>
@@ -947,7 +841,7 @@
             </div>
         </div>
     </nav>
-    <!-- Main Content Wrapper -->
+
     <div class="main-wrapper">
         <main class="main-content">
             <div class="content-wrapper">
@@ -960,6 +854,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+
                 @if(session('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <i class="fas fa-exclamation-circle"></i>
@@ -969,35 +864,35 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+
                 @yield('content')
             </div>
         </main>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Mobile sidebar toggle
         function toggleSidebar() {
             document.body.classList.toggle('sidebar-open');
         }
-        // Desktop sidebar collapse/expand
+
         function toggleDesktopSidebar() {
             document.body.classList.toggle('sidebar-collapsed');
-            // Save state to localStorage
             const isCollapsed = document.body.classList.contains('sidebar-collapsed');
             localStorage.setItem('sidebarCollapsed', isCollapsed);
         }
-        // Load saved sidebar state on page load
+
         document.addEventListener('DOMContentLoaded', function () {
             const savedState = localStorage.getItem('sidebarCollapsed');
             if (savedState === 'true') {
                 document.body.classList.add('sidebar-collapsed');
             }
-            // Initialize table search and filter if table exists
+
             if (document.getElementById('table')) {
                 initializeTableSearchAndFilter();
             }
         });
-        // Close mobile sidebar when clicking on a link
+
         document.querySelectorAll('.sidebar-nav .nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth < 992) {
@@ -1005,26 +900,30 @@
                 }
             });
         });
-        // Close mobile sidebar on window resize if screen becomes large
+
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 992) {
                 document.body.classList.remove('sidebar-open');
             }
         });
-        // Add smooth scrolling to sidebar
-        document.querySelector('.admin-sidebar').addEventListener('wheel', (e) => {
-            e.preventDefault();
-            e.currentTarget.scrollTop += e.deltaY;
-        });
-        // Auto-hide alerts after 5 seconds
+
+        const sidebar = document.querySelector('.admin-sidebar');
+        if (sidebar) {
+            sidebar.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                e.currentTarget.scrollTop += e.deltaY;
+            });
+        }
+
         document.querySelectorAll('.alert').forEach(alert => {
             setTimeout(() => {
-                if (alert.querySelector('.btn-close')) {
-                    alert.querySelector('.btn-close').click();
+                const closeBtn = alert.querySelector('.btn-close');
+                if (closeBtn) {
+                    closeBtn.click();
                 }
             }, 5000);
         });
-        // Add loading state to buttons
+
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', function () {
                 const submitBtn = form.querySelector('button[type="submit"]');
@@ -1034,12 +933,15 @@
                 }
             });
         });
-        // System status check (simulated)
+
         function updateSystemStatus() {
             const statusIndicator = document.querySelector('.status-indicator');
-            const statusText = document.querySelector('.status-indicator').nextElementSibling;
-            // Simulate random status check
-            const isOnline = Math.random() > 0.1; // 90% uptime simulation
+            const statusText = statusIndicator ? statusIndicator.nextElementSibling : null;
+
+            if (!statusIndicator || !statusText) return;
+
+            const isOnline = Math.random() > 0.1;
+
             if (isOnline) {
                 statusIndicator.className = 'status-indicator status-online';
                 statusText.textContent = 'System Online';
@@ -1048,9 +950,9 @@
                 statusText.textContent = 'System Offline';
             }
         }
-        // Update system status every 30 seconds
+
         setInterval(updateSystemStatus, 30000);
-        // Keyboard shortcut for sidebar toggle (Ctrl/Cmd + B)
+
         document.addEventListener('keydown', function (e) {
             if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
                 e.preventDefault();
@@ -1061,11 +963,11 @@
                 }
             }
         });
-        // Advanced Table Search and Filter System
+
         function initializeTableSearchAndFilter() {
             const table = document.getElementById('table');
             if (!table) return;
-            // Create search and filter container
+
             const searchContainer = document.createElement('div');
             searchContainer.className = 'search-filter-container';
             searchContainer.innerHTML = `
@@ -1111,42 +1013,45 @@
                     </div>
                 </div>
             `;
-            // Insert search container before the table
+
             table.parentNode.insertBefore(searchContainer, table);
-            // Get table elements
+
             const tbody = table.querySelector('tbody');
             const thead = table.querySelector('thead');
             const rows = Array.from(tbody.querySelectorAll('tr'));
             const headers = Array.from(thead.querySelectorAll('th'));
-            // Populate column filter dropdown
+
             const columnFilter = document.getElementById('columnFilter');
             headers.forEach((header, index) => {
-                if (header.textContent.trim() !== 'Actions') { // Skip actions column
+                if (header.textContent.trim() !== 'Actions') {
                     const option = document.createElement('option');
                     option.value = index;
                     option.textContent = header.textContent.trim();
                     columnFilter.appendChild(option);
                 }
             });
-            // Search and filter variables
+
             let currentSearchTerm = '';
             let currentColumnFilter = '';
             let currentRowsPerPage = 10;
             let currentPage = 1;
             let filteredRows = [...rows];
-            // Update result count
+
             function updateResultCount() {
                 document.getElementById('resultCount').textContent = filteredRows.length;
                 document.getElementById('totalCount').textContent = rows.length;
             }
-            // Filter rows based on search and column filter
+
             function filterRows() {
                 filteredRows = rows.filter(row => {
                     const cells = Array.from(row.querySelectorAll('td'));
-                    // Apply search filter
                     let matchesSearch = true;
+
                     if (currentSearchTerm) {
-                        const searchColumns = currentColumnFilter ? [parseInt(currentColumnFilter)] : cells.map((_, index) => index);
+                        const searchColumns = currentColumnFilter
+                            ? [parseInt(currentColumnFilter)]
+                            : cells.map((_, index) => index);
+
                         matchesSearch = searchColumns.some(colIndex => {
                             if (cells[colIndex]) {
                                 const cellText = cells[colIndex].textContent.toLowerCase();
@@ -1155,16 +1060,17 @@
                             return false;
                         });
                     }
+
                     return matchesSearch;
                 });
+
                 displayRows();
                 updateResultCount();
             }
-            // Display rows with pagination
+
             function displayRows() {
-                // Hide all rows first
                 rows.forEach(row => row.style.display = 'none');
-                // Show filtered rows based on pagination
+
                 if (currentRowsPerPage === 'all') {
                     filteredRows.forEach(row => row.style.display = '');
                 } else {
@@ -1173,13 +1079,14 @@
                     const pageRows = filteredRows.slice(startIndex, endIndex);
                     pageRows.forEach(row => row.style.display = '');
                 }
-                // Show no results message if needed
+
                 showNoResultsMessage();
                 updatePagination();
             }
-            // Show no results message
+
             function showNoResultsMessage() {
                 let noResultsRow = tbody.querySelector('.no-results-row');
+
                 if (filteredRows.length === 0) {
                     if (!noResultsRow) {
                         noResultsRow = document.createElement('tr');
@@ -1194,29 +1101,29 @@
                         tbody.appendChild(noResultsRow);
                     }
                     noResultsRow.style.display = '';
-                } else {
-                    if (noResultsRow) {
-                        noResultsRow.style.display = 'none';
-                    }
+                } else if (noResultsRow) {
+                    noResultsRow.style.display = 'none';
                 }
             }
-            // Update pagination
+
             function updatePagination() {
                 let paginationContainer = document.querySelector('.custom-pagination');
+
                 if (currentRowsPerPage === 'all' || filteredRows.length <= parseInt(currentRowsPerPage)) {
-                    if (paginationContainer) {
-                        paginationContainer.remove();
-                    }
+                    if (paginationContainer) paginationContainer.remove();
                     return;
                 }
+
                 const totalPages = Math.ceil(filteredRows.length / parseInt(currentRowsPerPage));
+
                 if (!paginationContainer) {
                     paginationContainer = document.createElement('div');
                     paginationContainer.className = 'custom-pagination d-flex justify-content-center mt-3';
                     table.parentNode.appendChild(paginationContainer);
                 }
+
                 let paginationHTML = '<nav><ul class="pagination">';
-                // Previous button
+
                 paginationHTML += `
                     <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
                         <a class="page-link" href="#" data-page="${currentPage - 1}">
@@ -1224,7 +1131,7 @@
                         </a>
                     </li>
                 `;
-                // Page numbers
+
                 for (let i = 1; i <= totalPages; i++) {
                     if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
                         paginationHTML += `
@@ -1236,7 +1143,7 @@
                         paginationHTML += '<li class="page-item disabled"><span class="page-link">...</span></li>';
                     }
                 }
-                // Next button
+
                 paginationHTML += `
                     <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
                         <a class="page-link" href="#" data-page="${currentPage + 1}">
@@ -1244,9 +1151,10 @@
                         </a>
                     </li>
                 `;
+
                 paginationHTML += '</ul></nav>';
                 paginationContainer.innerHTML = paginationHTML;
-                // Add pagination click handlers
+
                 paginationContainer.querySelectorAll('.page-link').forEach(link => {
                     link.addEventListener('click', function (e) {
                         e.preventDefault();
@@ -1258,35 +1166,40 @@
                     });
                 });
             }
-            // Event listeners
+
             document.getElementById('tableSearch').addEventListener('input', function () {
                 currentSearchTerm = this.value;
                 currentPage = 1;
                 filterRows();
             });
+
             document.getElementById('columnFilter').addEventListener('change', function () {
                 currentColumnFilter = this.value;
                 currentPage = 1;
                 filterRows();
             });
+
             document.getElementById('rowsPerPage').addEventListener('change', function () {
                 currentRowsPerPage = this.value;
                 currentPage = 1;
                 displayRows();
             });
+
             document.getElementById('clearFilters').addEventListener('click', function () {
                 document.getElementById('tableSearch').value = '';
                 document.getElementById('columnFilter').value = '';
                 document.getElementById('rowsPerPage').value = '10';
+
                 currentSearchTerm = '';
                 currentColumnFilter = '';
                 currentRowsPerPage = 10;
                 currentPage = 1;
                 filteredRows = [...rows];
+
                 displayRows();
                 updateResultCount();
             });
-            // Initialize
+
             filterRows();
         }
     </script>

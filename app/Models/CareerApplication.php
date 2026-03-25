@@ -13,6 +13,8 @@ class CareerApplication extends Model
         'phone',
         'cv',
         'message',
+        'experience_level',
+        'immediate_availability',
         'status',
     ];
 
