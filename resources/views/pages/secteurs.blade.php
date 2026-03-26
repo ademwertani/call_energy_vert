@@ -5,11 +5,11 @@
 @section('content')
 
 <style>
-    .secteurs-exact{
-        background:#FAFAFA;
-        padding: 10px 8px 20px;
-        font-family:'Inter', sans-serif;
-    }
+.secteurs-exact{
+    background:#FAFAFA;
+    padding: 70px 8px 20px;
+    font-family:'Inter', sans-serif;
+}
 
     .secteurs-exact .wrap{
         max-width: 1440px;
@@ -88,29 +88,38 @@
         margin-top:24px;
     }
 
-    .secteurs-exact .mini-card{
-        min-height:250px;
-        border-radius:24px;
-        border:1.5px solid #f0c85c;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        text-align:center;
-        padding:18px;
-        background:
-            radial-gradient(circle at center, #f4f4f4 0%, #f1f1f1 38%, #dff3e5 72%, #b5e0c3 100%);
-        box-shadow: inset 0 0 50px rgba(255,255,255,0.9);
-        color:#1d1d1d;
-        font-size:26px;
-        line-height:1.35;
-        font-weight:500;
-    }
+.secteurs-exact .mini-card{
+    min-height:250px;
+    border-radius:24px;
+    border:1.5px solid #f0c85c;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:18px;
+    background:
+        radial-gradient(circle at center,
+            #ffffff 0%,
+            #ffffff 28%,
+            #eefaf2 40%,
+            #cfead8 68%,
+            #9fd4b3 100%);
+    box-shadow: inset 0 0 22px rgba(255,255,255,0.7);
+    color:#1d1d1d;
+    font-size:26px;
+    line-height:1.35;
+    font-weight:500;
+}
 
-    .secteurs-exact .mini-card.beige{
-        background:
-            radial-gradient(circle at center, #f3f3f3 0%, #f0f0f0 38%, #ece8dd 72%, #ded7c7 100%);
-    }
-
+.secteurs-exact .mini-card.beige{
+    background:
+        radial-gradient(circle at center,
+            #ffffff 0%,
+            #ffffff 28%,
+            #f6f1e8 40%,
+            #e5d8bf 68%,
+            #cfbb95 100%);
+}
     .secteurs-exact .btn-wrap{
         padding-top: 18px;
     }
@@ -133,7 +142,7 @@
 
     .secteurs-exact .btn-green:hover{
         color:#fff;
-        background:#009245;
+        background:#004d24;
     }
 
     .secteurs-exact .spacer-lg{

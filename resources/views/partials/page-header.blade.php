@@ -91,30 +91,38 @@ function heroImage($image) {
 
 /* SECTEURS */
 .pb-hero__inner--secteurs{
-    text-align:left;
-    margin-left:0;
-    margin-right:auto;
-    max-width:860px;
+    text-align:center;
+    margin:0 auto;
+    max-width:100%;
+    width:100%;
+    padding:0 40px;
 }
 
 .pb-title-secteur{
-    font-size:70px;
-    font-weight:900;
-    line-height:1.02;
-    margin:0 0 14px 0;
-    color:#fff;
-    text-shadow:0 4px 30px rgba(0,0,0,.6);
+    font-family: 'Sora', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -1px;
+    color: #ffffff;
+    text-shadow: 0 3px 18px rgba(0,0,0,0.35);
+    margin: 0 0 20px 0;
+    width: 100%;
 }
 
-.pb-summary-secteur{
-    font-size:20px;
-    font-weight:500;
-    line-height:1.6;
-    margin:0;
-    color:#d1d5db;
-    text-shadow:0 2px 14px rgba(0,0,0,.35);
+.pb-subtitle-secteur{
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #b3b3b3 !important;
+    text-align: left;
+    width: 100%;
+    margin: 18px 0 0 0;
 }
-
+.pb-hero__inner--secteurs .pb-subtitle-secteur{
+    text-align:left;
+}
 .pb-hero__buttons{
     display:flex;
     justify-content:center;
