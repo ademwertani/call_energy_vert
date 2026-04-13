@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Call energie vert - Accueil')
+@section('title', __('home.meta_title'))
 
 @section('content')
 
@@ -497,46 +497,25 @@
 </style>
 
 @php
-    // Valeurs
-    $values = ['Agilité','Transparence','Engagement','Performance'];
-
-    // Services
-    $services = [
-        ['icon' => '📞', 'title' => 'Service Client', 'desc' => 'Gestion des appels entrants et assistance client.'],
-        ['icon' => '💬', 'title' => 'Support Technique', 'desc' => 'Accompagnement et résolution des problèmes techniques.'],
-        ['icon' => '📈', 'title' => 'Télévente', 'desc' => 'Développement des ventes et acquisition de clients.'],
-        ['icon' => '🧾', 'title' => 'Back Office', 'desc' => 'Traitement administratif et gestion des dossiers.'],
-        ['icon' => '🤝', 'title' => 'Gestion de la Relation Client', 'desc' => 'Suivi et fidélisation des clients.'],
-    ];
-
-
-    // Secteurs d’activité (comme la capture)
-    $sectors = [
-        ['title' => "Énergie & efficacité\nénergétique", 'icon' => 'energy'],
-        ['title' => "Fintech & Services\nfinancier", 'icon' => 'fintech'],
-        ['title' => "E-commerce &\nvente aux\ndétails", 'icon' => 'ecommerce'],
-        ['title' => "Télécommunications", 'icon' => 'telecom'],
-        ['title' => "Tourisme &\nhospitalité", 'icon' => 'tourism'],
-    ];
+    $values = trans('home.values');
+    $services = trans('home.services');
+    $sectors = trans('home.sectors');
 @endphp
 
 <!-- ====== A PROPOS ====== -->
 <section class="av-section av-bg-dark" style="padding-top:40px; padding-bottom:40px;">
     <div class="container text-center">
-        <h2 class="av-title-top">À PROPOS</h2>
+        <h2 class="av-title-top">{{ __('home.about_title') }}</h2>
         <p class="av-about-text">
-            Fondé en 2022, Call Énergie Vert est un centre de contact offshore et acteur BPO,
-            disposant de deux sites opérationnels en Tunisie et au Maroc, totalisant 100 positions.
-            Nous combinons expertise, flexibilité opérationnelle et orientation résultats afin de
-            répondre efficacement aux exigences du marché européen.
-        </p>
+    {{ __('home.about_text') }}
+</p>
     </div>
 </section>
 
 <!-- ====== NOS VALEURS ====== -->
 <section class="av-values-wrap">
     <div class="container">
-        <h2 class="av-values-title">Nos Valeurs</h2>
+        <h2 class="av-values-title">{{ __('home.values_title') }}</h2>
         <ul class="av-values-list">
             @foreach($values as $v)
                 <li><span class="av-check">✓</span> {{ $v }}</li>
@@ -548,7 +527,7 @@
 <!-- ====== NOS SERVICES ====== -->
 <section class="av-section av-bg-dark">
     <div class="container">
-        <h2 class="av-services-title">Nos services</h2>
+        <h2 class="av-services-title">{{ __('home.services_title') }}</h2>
 
         <div class="av-services-grid">
             @foreach($services as $s)
@@ -562,7 +541,9 @@
 
         <!-- ====== SECTEURS D’ACTIVITÉ  ====== -->
         <div class="av-sectors-wrap">
-            <h2 class="av-partners-title" style="margin-top: 60px;">Secteurs d’activité</h2>
+            <h2 class="av-partners-title" style="margin-top: 60px;">
+    {{ __('home.sectors_title') }}
+</h2>
 
             <div class="av-sectors-card">
                 <div class="av-sectors-grid">
@@ -628,7 +609,7 @@
 <!-- ====== POURQUOI NOUS CHOISIR ====== -->
 <section class="av-why-section">
     <div class="container">
-        <h2 class="av-why-title">Pourquoi nous choisir ?</h2>
+        <h2 class="av-why-title">{{ __('home.why_title') }}</h2>
 
         <div class="av-why-image">
             <img src="{{ asset('img/pourq.png') }}" alt="Pourquoi nous choisir">
@@ -637,7 +618,7 @@
 </section>
 <section class="partners-av py-5">
     <div class="container">
-        <h2 class="partners-title text-center mb-5">Nos Partenaires</h2>
+        <h2 class="partners-title text-center mb-5">{{ __('home.partners_title') }}</h2>
 
         <div class="partners-slider">
 
@@ -666,7 +647,7 @@
 <!-- ====== BLOG ====== -->
 <section class="av-blog-section">
     <div class="av-blog-wrapper">
-        <h2 class="av-blog-title">BLOG</h2>
+        <h2 class="av-blog-title">{{ __('home.blog_title') }}</h2>
 
         <div class="av-blog-grid">
             {{-- Grande image verticale à gauche --}}
@@ -693,8 +674,8 @@
 
                             <div class="av-blog-item-footer">
                                 <a href="{{ route('blog.show', $blog->slug) }}" class="av-blog-readmore">
-                                    Lire la suite
-                                </a>
+    {{ __('home.read_more') }}
+</a>
                             </div>
                         </div>
                     </article>

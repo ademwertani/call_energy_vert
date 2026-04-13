@@ -33,53 +33,82 @@
             </button>
 
             {{-- MENU --}}
-            <div class="collapse navbar-collapse justify-content-center" id="navbarPremium">
-                <ul class="navbar-nav gap-lg-5 text-center">
+            <div class="collapse navbar-collapse" id="navbarPremium">
+    <ul class="navbar-nav mx-auto gap-lg-5 text-center">
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}"
-                           href="{{ url('/') }}">
-                            Accueil
-                        </a>
-                    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('/') ? 'active' : '' }}"
+               href="{{ url('/') }}">
+                {{ __('nav.home') }}
+            </a>
+        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('about') ? 'active' : '' }}"
-                           href="{{ url('/about') }}">
-                            À propos
-                        </a>
-                    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('about') ? 'active' : '' }}"
+               href="{{ url('/about') }}">
+                {{ __('nav.about') }}
+            </a>
+        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('services') ? 'active' : '' }}"
-                           href="{{ url('/services') }}">
-                            Services
-                        </a>
-                    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('services') ? 'active' : '' }}"
+               href="{{ url('/services') }}">
+                {{ __('nav.services') }}
+            </a>
+        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('secteurs') ? 'active' : '' }}"
-                           href="{{ url('/secteurs') }}">
-                            Secteurs d’activité
-                        </a>
-                    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('secteurs') ? 'active' : '' }}"
+               href="{{ url('/secteurs') }}">
+                {{ __('nav.sectors') }}
+            </a>
+        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}"
-                           href="{{ url('/contact') }}">
-                            Contact
-                        </a>
-                    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}"
+               href="{{ url('/contact') }}">
+                {{ __('nav.contact') }}
+            </a>
+        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('carriere') ? 'active' : '' }}"
-                           href="{{ url('/carriere') }}">
-                            Carrière
-                        </a>
-                    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('carriere') ? 'active' : '' }}"
+               href="{{ url('/carriere') }}">
+                {{ __('nav.career') }}
+            </a>
+        </li>
+    </ul>
 
-                </ul>
-            </div>
+    <ul class="navbar-nav ms-lg-3">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                {{ strtoupper(app()->getLocale()) }}
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item {{ app()->getLocale() === 'fr' ? 'active' : '' }}"
+                       href="{{ route('lang.switch', 'fr') }}">
+                        {{ __('nav.french') }}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}"
+                       href="{{ route('lang.switch', 'en') }}">
+                        {{ __('nav.english') }}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item {{ app()->getLocale() === 'es' ? 'active' : '' }}"
+                       href="{{ route('lang.switch', 'es') }}">
+                        {{ __('nav.spanish') }}
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
 
         </nav>
     </div>
@@ -97,6 +126,20 @@
 
 {{-- ================== STYLES PERSO ================== --}}
 <style>
+    .header-premium .dropdown-menu {
+    background: #111;
+    border: 1px solid #d4af37;
+}
+
+.header-premium .dropdown-item {
+    color: #fff !important;
+}
+
+.header-premium .dropdown-item:hover,
+.header-premium .dropdown-item.active {
+    background: #1a1a1a;
+    color: #d4af37 !important;
+}
 /* Supprimer l'espace blanc avant le navbar */
 html, body {
     margin: 0;

@@ -81,7 +81,17 @@ Route::post('/contact', [PublicContactController::class, 'store'])->name('contac
 
 // Partenariat public
 Route::post('/partnership', [PartnershipController::class, 'store'])->name('partner.store');
+Route::get('/lang/{locale}', function ($locale) {
+    $availableLocales = ['fr', 'en', 'es'];
 
+    if (! in_array($locale, $availableLocales)) {
+        abort(404);
+    }
+
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+})->name('lang.switch');
 // ===================== AUTH =====================
 
 Auth::routes();
