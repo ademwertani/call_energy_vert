@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Secteurs d’activité')
+@section('title', __('sectors.page_title'))
 
 @section('content')
 
@@ -43,22 +43,22 @@
     }
 
     .secteurs-exact .desc{
-    max-width:520px;
-    margin:22px 0 0;
-    font-size:18px;      /* avant 15px */
-    line-height:1.7;
-    color:#111;
-    font-weight:500;     /* plus gras */
-}
+        max-width:520px;
+        margin:22px 0 0;
+        font-size:18px;
+        line-height:1.7;
+        color:#111;
+        font-weight:500;
+    }
 
-.secteurs-exact .list{
-    margin:12px 0 0;
-    padding-left:20px;
-    font-size:18px;      /* avant 15px */
-    line-height:1.8;
-    color:#111;
-    font-weight:500;     /* plus gras */
-}
+    .secteurs-exact .list{
+        margin:12px 0 0;
+        padding-left:20px;
+        font-size:18px;
+        line-height:1.8;
+        color:#111;
+        font-weight:500;
+    }
 
     .secteurs-exact .img-box{
         width:100%;
@@ -88,38 +88,39 @@
         margin-top:24px;
     }
 
-.secteurs-exact .mini-card{
-    min-height:250px;
-    border-radius:24px;
-    border:1.5px solid #f0c85c;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:18px;
-    background:
-        radial-gradient(circle at center,
-            #ffffff 0%,
-            #ffffff 28%,
-            #eefaf2 40%,
-            #cfead8 68%,
-            #9fd4b3 100%);
-    box-shadow: inset 0 0 22px rgba(255,255,255,0.7);
-    color:#1d1d1d;
-    font-size:26px;
-    line-height:1.35;
-    font-weight:500;
-}
+    .secteurs-exact .mini-card{
+        min-height:250px;
+        border-radius:24px;
+        border:1.5px solid #f0c85c;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        padding:18px;
+        background:
+            radial-gradient(circle at center,
+                #ffffff 0%,
+                #ffffff 28%,
+                #eefaf2 40%,
+                #cfead8 68%,
+                #9fd4b3 100%);
+        box-shadow: inset 0 0 22px rgba(255,255,255,0.7);
+        color:#1d1d1d;
+        font-size:26px;
+        line-height:1.35;
+        font-weight:500;
+    }
 
-.secteurs-exact .mini-card.beige{
-    background:
-        radial-gradient(circle at center,
-            #ffffff 0%,
-            #ffffff 28%,
-            #f6f1e8 40%,
-            #e5d8bf 68%,
-            #cfbb95 100%);
-}
+    .secteurs-exact .mini-card.beige{
+        background:
+            radial-gradient(circle at center,
+                #ffffff 0%,
+                #ffffff 28%,
+                #f6f1e8 40%,
+                #e5d8bf 68%,
+                #cfbb95 100%);
+    }
+
     .secteurs-exact .btn-wrap{
         padding-top: 18px;
     }
@@ -170,10 +171,11 @@
             height:54px;
             font-size:22px;
         }
+
         .secteurs-exact .desc,
-.secteurs-exact .list{
-    font-size:16px;
-}
+        .secteurs-exact .list{
+            font-size:16px;
+        }
     }
 
     @media (max-width: 991px){
@@ -239,107 +241,101 @@
     }
 </style>
 
+@php
+    $energyItems = trans('sectors.energy_items');
+    $fintechCards = trans('sectors.fintech_cards');
+    $telecomItems = trans('sectors.telecom_items');
+    $tourismItems = trans('sectors.tourism_items');
+@endphp
+
 <div class="secteurs-exact">
     <div class="wrap">
         <div class="grid">
 
-            {{-- Ligne 1 gauche --}}
             <div>
-                <h2 class="title">Efficacité et optimisation<br>énergétique</h2>
+                <h2 class="title">{!! nl2br(e(__('sectors.energy_title'))) !!}</h2>
 
                 <p class="desc">
-                    Notre cœur d’expertise. Nous collaborons avec des entreprises actives dans :
+                    {{ __('sectors.energy_desc') }}
                 </p>
 
                 <ul class="list">
-                    <li>Innovation énergétique</li>
-                    <li>Solutions techniques</li>
-                    <li>Audit et diagnostic énergétique</li>
-                    <li>Solutions d'économie d'énergie</li>
+                    @foreach($energyItems as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
                 </ul>
             </div>
 
-            {{-- Ligne 1 droite --}}
             <div class="img-box right">
-                <img src="{{ asset('img/secteur-energie.png') }}" alt="Efficacité énergétique" class="img">
+                <img src="{{ asset('img/secteur-energie.png') }}" alt="{{ __('sectors.energy_alt') }}" class="img">
             </div>
 
-            {{-- Ligne 2 gauche --}}
             <div>
                 <div class="mini-grid">
-                    <div class="mini-card beige">Comptabilité<br>générale et<br>analytique</div>
-                    <div class="mini-card">Gestion des<br>factures et<br>paiements</div>
-                    <div class="mini-card">Reporting financier</div>
-                    <div class="mini-card beige">Conseil et<br>optimisation</div>
+                    @foreach($fintechCards as $index => $card)
+                        <div class="mini-card {{ in_array($index, [0, 3]) ? 'beige' : '' }}">
+                            {!! nl2br(e($card)) !!}
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
-            {{-- Ligne 2 droite --}}
             <div>
-                <h2 class="sub-title">Fintech &amp; Services financier</h2>
+                <h2 class="sub-title">{{ __('sectors.fintech_title') }}</h2>
 
                 <p class="desc">
-                    Nous proposons des solutions comptables modernes et fiables pour simplifier la gestion
-                    financière de votre entreprise et optimiser vos performances.
+                    {{ __('sectors.fintech_desc') }}
                 </p>
 
                 <div class="spacer-lg"></div>
 
                 <div class="btn-wrap">
-                    <a href="{{ route('contact.create') }}" class="btn-green">Lire la suite</a>
+                    <a href="{{ route('contact.create') }}" class="btn-green">{{ __('sectors.read_more') }}</a>
                 </div>
             </div>
 
-            {{-- Ligne 3 gauche --}}
             <div>
-                <h2 class="sub-title">E-commerce &amp; vente aux<br>détails</h2>
+                <h2 class="sub-title">{!! nl2br(e(__('sectors.ecommerce_title'))) !!}</h2>
 
                 <p class="desc">
-                    Nous accompagnons les entreprises pour développer leur présence digitale,
-                    augmenter leurs ventes et offrir une expérience client fluide et moderne.
+                    {{ __('sectors.ecommerce_desc') }}
                 </p>
             </div>
 
-            {{-- Ligne 3 droite --}}
             <div class="img-box right">
-                <img src="{{ asset('img/secteur-ecommerce.png') }}" alt="E-commerce" class="img">
+                <img src="{{ asset('img/secteur-ecommerce.png') }}" alt="{{ __('sectors.ecommerce_alt') }}" class="img">
             </div>
 
-            {{-- Ligne 4 gauche --}}
             <div class="img-box">
-                <img src="{{ asset('img/secteur-telecom.png') }}" alt="Télécommunications" class="img">
+                <img src="{{ asset('img/secteur-telecom.png') }}" alt="{{ __('sectors.telecom_alt') }}" class="img">
             </div>
 
-            {{-- Ligne 4 droite --}}
             <div>
-                <h2 class="sub-title">Télécommunications</h2>
+                <h2 class="sub-title">{{ __('sectors.telecom_title') }}</h2>
 
                 <p class="desc">
-                    Accompagnement client et des opérateurs et prestataires télécom dans :
+                    {{ __('sectors.telecom_desc') }}
                 </p>
 
                 <ul class="list">
-                    <li>Service client</li>
-                    <li>Gestion des demandes et réclamations</li>
-                    <li>Campagnes de fidélisation</li>
-                    <li>Prospection commerciale</li>
+                    @foreach($telecomItems as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
                 </ul>
             </div>
 
-            {{-- Ligne 5 gauche --}}
             <div>
-                <h2 class="sub-title">Tourisme &amp; hospitalité</h2>
+                <h2 class="sub-title">{{ __('sectors.tourism_title') }}</h2>
 
                 <ul class="list" style="margin-top:18px;">
-                    <li>Promotion digitale des hébergements</li>
-                    <li>Gestion des réservations multicanal (Airbnb, Booking, WhatsApp, réseaux sociaux)</li>
-                    <li>Relation client &amp; Ups-sell (Upsell)</li>
+                    @foreach($tourismItems as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
                 </ul>
             </div>
 
-            {{-- Ligne 5 droite --}}
             <div class="img-box right">
-                <img src="{{ asset('img/secteur-tourisme.png') }}" alt="Tourisme et hospitalité" class="img">
+                <img src="{{ asset('img/secteur-tourisme.png') }}" alt="{{ __('sectors.tourism_alt') }}" class="img">
             </div>
 
         </div>

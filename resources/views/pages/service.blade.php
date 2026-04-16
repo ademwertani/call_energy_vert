@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nos Services')
+@section('title', __('services.page_title'))
 
 @section('content')
 
@@ -16,7 +16,6 @@
 
   .page-services * { box-sizing: border-box; }
 
-  /* ── Titre principal ── */
   .sx-heading {
     text-align: center;
     max-width: 780px;
@@ -31,7 +30,6 @@
     color: #7CAE2A;
   }
 
-  /* ── Grille ── */
   .svc-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -44,7 +42,6 @@
     .svc-grid { grid-template-columns: 1fr; }
   }
 
-  /* ── Carte ── */
   .card-svc {
     background: #fff;
     border-radius: 12px;
@@ -93,7 +90,6 @@
     border-top: 2px solid #e8f0d8;
   }
 
-  /* ── Empty state ── */
   .svc-empty {
     background: rgba(255,255,255,0.85);
     border: 1px dashed #c8dba8;
@@ -109,8 +105,9 @@
 <section class="page-services">
 
   <h1 class="sx-heading">
-    Nous intervenons sur l'ensemble de la chaîne de valeur client en proposant
-    <span>des solutions adaptées</span> à chaque entreprise et à chaque secteur d'activité
+    {{ __('services.heading_before') }}
+    <span>{{ __('services.heading_highlight') }}</span>
+    {{ __('services.heading_after') }}
   </h1>
 
   @if($services->count())
@@ -122,6 +119,7 @@
                 ? asset($img)
                 : asset('storage/'.$img);
         @endphp
+
         <a href="{{ route('services.show', $service->id) }}" class="card-svc wow fadeInUp"
            data-wow-delay="{{ number_format(($loop->index % 4) * 0.1, 1) }}s">
           <div class="thumb">
@@ -133,6 +131,7 @@
               </div>
             @endif
           </div>
+
           <div class="card-label">{{ $service->name }}</div>
         </a>
       @endforeach
@@ -146,8 +145,12 @@
 
   @else
     <div class="svc-empty">
-      <p class="h5 mb-1">Aucun service disponible pour le moment.</p>
-      <p class="mb-0">Revenez bientôt ou <a href="{{ url('/contact') }}">contactez-nous</a> pour une demande sur mesure.</p>
+      <p class="h5 mb-1">{{ __('services.empty_title') }}</p>
+      <p class="mb-0">
+        {{ __('services.empty_text_before') }}
+        <a href="{{ url('/contact') }}">{{ __('services.contact_link') }}</a>
+        {{ __('services.empty_text_after') }}
+      </p>
     </div>
   @endif
 

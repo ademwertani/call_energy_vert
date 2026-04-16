@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $about->heading ?? 'À propos de nous')
+@section('title', $about->heading ?? __('about.page_title'))
 
 @section('content')
 
@@ -155,27 +155,27 @@
 <div class="about-page">
     <section class="about-hero">
         <div class="about-hero-inner">
-            <h2 class="about-small-title">Qui sommes-nous ?</h2>
+            <h2 class="about-small-title">{{ __('about.who_we_are') }}</h2>
 
             <h1 class="about-main-title">
-                {{ $about->heading ?? 'Call Énergie Vert est un centre de contact offshore et acteur BPO' }}
+                {{ $about->heading ?? __('about.heading_fallback') }}
             </h1>
 
             <p class="about-text">
-                {{ $about->intro ?? "spécialisé dans la gestion de la relation client. Depuis sa création en 2022, l’entreprise accompagne des acteurs européens en proposant des services à forte valeur ajoutée, notamment dans les domaines des économies d’énergie et de la performance énergétique." }}
+                {{ $about->intro ?? __('about.intro_fallback') }}
             </p>
 
             <div class="about-mission-box">
-                <h3 class="about-mission-title">Notre mission</h3>
+                <h3 class="about-mission-title">{{ __('about.our_mission') }}</h3>
                 <p class="about-mission-text">
-                    {{ $about->mission ?? "Offrir un service de haute qualité, engagé en faveur de l’environnement et spécialisé dans le secteur de l’énergie, en particulier dans les actions liées aux économies et à l’efficacité énergétique." }}
+                    {{ $about->mission ?? __('about.mission_fallback') }}
                 </p>
             </div>
 
-            <h3 class="about-section-title">Infrastructure et méthodologie</h3>
+            <h3 class="about-section-title">{{ __('about.infrastructure_methodology') }}</h3>
 
             <p class="about-bottom-text">
-                {{ $about->methodology ?? "Nous assurons un suivi rigoureux de nos indicateurs de performance (KPI) et mettons en place des plans d’amélioration continue afin de maintenir un niveau de service élevé et une intégration fluide avec les systèmes de nos clients. Nos solutions s’adaptent aux campagnes ponctuelles, aux pics d’activité, aux projets multilingues et aux besoins spécifiques de chaque client." }}
+                {{ $about->methodology ?? __('about.methodology_fallback') }}
             </p>
         </div>
     </section>
