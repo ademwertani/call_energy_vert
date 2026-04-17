@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Contactez-nous')
+@section('title', __('contact.page_title'))
 
 @section('content')
 <style>
@@ -18,7 +18,6 @@
     --success-border:#a7f3d0;
 }
 
-/* ================= FORM TOP ================= */
 .offer-form-section,
 .partner-form-section{
     display:none;
@@ -221,7 +220,6 @@
     padding-left:18px;
 }
 
-/* ================= HERO ================= */
 .contact-hero{
     position:relative;
     height:520px;
@@ -260,7 +258,6 @@
     font-weight:800;
 }
 
-/* ================= BUTTONS ================= */
 .contact-actions{
     background:#fff;
     padding:30px 20px 40px;
@@ -296,13 +293,11 @@
     color:#fff;
 }
 
-/* ================= WHITE SPACE ================= */
 .contact-space{
     height:180px;
     background:#fff;
 }
 
-/* ================= MOBILE ================= */
 @media (max-width:991px){
     .offer-grid,
     .partner-grid{
@@ -370,19 +365,17 @@
 
 <section class="contact-page">
 
-    {{-- FORMULAIRE DEMANDE D'OFFRE --}}
     <section class="offer-form-section {{ ($errors->offer->any() || session('offer_success')) ? 'show' : '' }}" id="offerFormSection">
         <div class="offer-form-box">
             <div class="offer-close-wrap">
                 <button type="button" class="offer-close" id="closeOfferForm">×</button>
             </div>
 
-            <h2 class="offer-form-title">Demande d’offre</h2>
+            <h2 class="offer-form-title">{{ __('contact.offer_title') }}</h2>
 
             <p class="offer-form-desc">
-                Vous souhaitez externaliser tout ou une partie de vos opérations ?<br>
-                Remplissez ce formulaire afin que notre équipe puisse étudier votre besoin
-                et vous proposer une solution adaptée.
+                {{ __('contact.offer_desc_1') }}<br>
+                {{ __('contact.offer_desc_2') }}
             </p>
 
             @if(session('offer_success'))
@@ -406,68 +399,66 @@
 
                 <div class="offer-grid">
                     <div>
-                        <input type="text" name="company_name" class="offer-input @error('company_name', 'offer') input-error @enderror" placeholder="Nom de l’entreprise" value="{{ old('company_name') }}" required>
+                        <input type="text" name="company_name" class="offer-input @error('company_name', 'offer') input-error @enderror" placeholder="{{ __('contact.offer_company_name') }}" value="{{ old('company_name') }}" required>
                         @error('company_name', 'offer') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="text" name="contact_name" class="offer-input @error('contact_name', 'offer') input-error @enderror" placeholder="Nom et prénom du contact" value="{{ old('contact_name') }}" required>
+                        <input type="text" name="contact_name" class="offer-input @error('contact_name', 'offer') input-error @enderror" placeholder="{{ __('contact.offer_contact_name') }}" value="{{ old('contact_name') }}" required>
                         @error('contact_name', 'offer') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="email" name="email" class="offer-input @error('email', 'offer') input-error @enderror" placeholder="Email professionnel" value="{{ old('email') }}" required>
+                        <input type="email" name="email" class="offer-input @error('email', 'offer') input-error @enderror" placeholder="{{ __('contact.offer_email') }}" value="{{ old('email') }}" required>
                         @error('email', 'offer') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="text" name="phone" class="offer-input @error('phone', 'offer') input-error @enderror" placeholder="Téléphone" value="{{ old('phone') }}">
+                        <input type="text" name="phone" class="offer-input @error('phone', 'offer') input-error @enderror" placeholder="{{ __('contact.offer_phone') }}" value="{{ old('phone') }}">
                         @error('phone', 'offer') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="text" name="activity_sector" class="offer-input @error('activity_sector', 'offer') input-error @enderror" placeholder="Secteur d’activité(cases à cocher)" value="{{ old('activity_sector') }}">
+                        <input type="text" name="activity_sector" class="offer-input @error('activity_sector', 'offer') input-error @enderror" placeholder="{{ __('contact.offer_activity_sector') }}" value="{{ old('activity_sector') }}">
                         @error('activity_sector', 'offer') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="text" name="service_type" class="offer-input @error('service_type', 'offer') input-error @enderror" placeholder="Type de service souhaité(cases à cocher)" value="{{ old('service_type') }}">
+                        <input type="text" name="service_type" class="offer-input @error('service_type', 'offer') input-error @enderror" placeholder="{{ __('contact.offer_service_type') }}" value="{{ old('service_type') }}">
                         @error('service_type', 'offer') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="offer-field-full">
-                        <input type="text" name="hear_about_us" class="offer-input @error('hear_about_us', 'offer') input-error @enderror" placeholder="How did you hear of us?" value="{{ old('hear_about_us') }}">
+                        <input type="text" name="hear_about_us" class="offer-input @error('hear_about_us', 'offer') input-error @enderror" placeholder="{{ __('contact.offer_hear_about_us') }}" value="{{ old('hear_about_us') }}">
                         @error('hear_about_us', 'offer') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="offer-field-full">
-                        <textarea name="message" class="offer-textarea @error('message', 'offer') input-error @enderror" placeholder="Description de votre projet / besoins spécifiques" required>{{ old('message') }}</textarea>
+                        <textarea name="message" class="offer-textarea @error('message', 'offer') input-error @enderror" placeholder="{{ __('contact.offer_message') }}" required>{{ old('message') }}</textarea>
                         @error('message', 'offer') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
                 </div>
 
                 <p class="offer-note">
-                    Un conseiller Call Énergie Vert vous contactera rapidement.
+                    {{ __('contact.offer_note') }}
                 </p>
 
-                <button type="submit" class="offer-submit">Envoyer la demande</button>
+                <button type="submit" class="offer-submit">{{ __('contact.offer_submit') }}</button>
             </form>
         </div>
     </section>
 
-    {{-- FORMULAIRE PARTENARIAT --}}
     <section class="partner-form-section {{ ($errors->partner->any() || session('partner_success')) ? 'show' : '' }}" id="partnerFormSection">
         <div class="partner-form-box">
             <div class="partner-close-wrap">
                 <button type="button" class="partner-close" id="closePartnerForm">×</button>
             </div>
 
-            <h2 class="partner-form-title">Prestataires de services & demandes de partenariat</h2>
+            <h2 class="partner-form-title">{{ __('contact.partner_title') }}</h2>
 
             <p class="partner-form-desc">
-                Call Énergie Vert développe des partenariats durables avec des acteurs
-                partageant les mêmes exigences de qualité et de performance.<br>
-                Soumettez votre proposition et explorons ensemble les opportunités de collaboration.
+                {{ __('contact.partner_desc_1') }}<br>
+                {{ __('contact.partner_desc_2') }}
             </p>
 
             @if(session('partner_success'))
@@ -491,79 +482,77 @@
 
                 <div class="partner-grid">
                     <div>
-                        <input type="text" name="company_name" class="partner-input @error('company_name', 'partner') input-error @enderror" placeholder="Nom de l’entreprise" value="{{ old('company_name') }}" required>
+                        <input type="text" name="company_name" class="partner-input @error('company_name', 'partner') input-error @enderror" placeholder="{{ __('contact.partner_company_name') }}" value="{{ old('company_name') }}" required>
                         @error('company_name', 'partner') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="text" name="contact_name" class="partner-input @error('contact_name', 'partner') input-error @enderror" placeholder="Nom et prénom du contact" value="{{ old('contact_name') }}" required>
+                        <input type="text" name="contact_name" class="partner-input @error('contact_name', 'partner') input-error @enderror" placeholder="{{ __('contact.partner_contact_name') }}" value="{{ old('contact_name') }}" required>
                         @error('contact_name', 'partner') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="email" name="email" class="partner-input @error('email', 'partner') input-error @enderror" placeholder="Email professionnel" value="{{ old('email') }}" required>
+                        <input type="email" name="email" class="partner-input @error('email', 'partner') input-error @enderror" placeholder="{{ __('contact.partner_email') }}" value="{{ old('email') }}" required>
                         @error('email', 'partner') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="text" name="phone" class="partner-input @error('phone', 'partner') input-error @enderror" placeholder="Téléphone" value="{{ old('phone') }}">
+                        <input type="text" name="phone" class="partner-input @error('phone', 'partner') input-error @enderror" placeholder="{{ __('contact.partner_phone') }}" value="{{ old('phone') }}">
                         @error('phone', 'partner') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="text" name="business_domain" class="partner-input @error('business_domain', 'partner') input-error @enderror" placeholder="Domaine d’activité(cases à cocher)" value="{{ old('business_domain') }}">
+                        <input type="text" name="business_domain" class="partner-input @error('business_domain', 'partner') input-error @enderror" placeholder="{{ __('contact.partner_business_domain') }}" value="{{ old('business_domain') }}">
                         @error('business_domain', 'partner') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
-                        <input type="text" name="service_type" class="partner-input @error('service_type', 'partner') input-error @enderror" placeholder="Type de service souhaité(cases à cocher)" value="{{ old('service_type') }}">
+                        <input type="text" name="service_type" class="partner-input @error('service_type', 'partner') input-error @enderror" placeholder="{{ __('contact.partner_service_type') }}" value="{{ old('service_type') }}">
                         @error('service_type', 'partner') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="partner-field-full">
                         <div class="partner-documents">
-                            <p>Documents (optionnel)</p>
+                            <p>{{ __('contact.partner_documents_optional') }}</p>
                             <ul>
-                                <li>Site web</li>
-                                <li>Brochure ou présentation</li>
+                                <li>{{ __('contact.partner_document_website') }}</li>
+                                <li>{{ __('contact.partner_document_brochure') }}</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="partner-field-full">
-                        <textarea name="proposal_description" class="partner-textarea @error('proposal_description', 'partner') input-error @enderror" placeholder="Description de votre offre ou proposition" required>{{ old('proposal_description') }}</textarea>
+                        <textarea name="proposal_description" class="partner-textarea @error('proposal_description', 'partner') input-error @enderror" placeholder="{{ __('contact.partner_proposal_description') }}" required>{{ old('proposal_description') }}</textarea>
                         @error('proposal_description', 'partner') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
                 </div>
 
                 <p class="partner-note">
-                    Notre équipe étudiera votre proposition et vous contactera si une collaboration est envisageable.
+                    {{ __('contact.partner_note') }}
                 </p>
 
-                <button type="submit" class="partner-submit">Envoyer la demande</button>
+                <button type="submit" class="partner-submit">{{ __('contact.partner_submit') }}</button>
             </form>
         </div>
     </section>
 
-    {{-- HERO --}}
     <section class="contact-hero">
         <div class="contact-hero-overlay">
             <div class="contact-hero-content">
                 <h1>
-                    Chez Call Énergie Vert, nous analysons vos besoins afin de
-                    vous proposer <span class="highlight">une solution sur mesure</span>,
-                    adaptée à votre secteur d’activité, et à vos objectifs.
+                    {{ __('contact.hero_before') }}
+                    <span class="highlight">{{ __('contact.hero_highlight') }}</span>,
+                    {{ __('contact.hero_after') }}
                 </h1>
             </div>
         </div>
     </section>
 
-    {{-- BUTTONS --}}
     <section class="contact-actions">
         <div class="container">
             <div class="contact-actions-wrap">
-                <button type="button" class="contact-btn" id="openOfferForm">Demande d’offre</button>
-                <button type="button" class="contact-btn" id="openPartnerForm">Partenariat</button>
+                <button type="button" class="contact-btn" id="openOfferForm">{{ __('contact.open_offer') }}</button>
+                <button type="button" class="contact-btn" id="openPartnerForm">{{ __('contact.open_partner') }}</button>
             </div>
         </div>
     </section>
